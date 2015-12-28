@@ -1,0 +1,1314 @@
+<!DOCTYPE HTML>
+<html>
+    <title>Permutations and Combinations for Programmers</title>
+    <head>
+<!-- link rel="stylesheet" type="text/css" href="comb_perm.css" -->
+
+        <style>
+            h1.intro {color:blue;}
+            p.important {color:green;}
+//            div.eg {color:red;}
+
+            div
+            {
+                padding-left: 0em;
+            }
+
+            div.eg
+            {
+                color:red;
+                font-weight:bold;
+            }
+
+            table,th,td
+            {
+                border:0px solid black;
+                border-collapse:collapse;
+            }
+
+            div.ex
+            {
+                border-width: 1px;  border-style: dotted; border-color: gray;
+padding-left: 2em;
+            }
+
+            div.code:nth-child(even)
+            {
+                -webkit-font-smoothing: antialiased;
+                font-family: "Lucida Console, Courier New", monospace;
+                display: block;
+                white-space: pre;
+                background-color: #EEEEEE; // DEBUG: red;
+            }
+
+            div.code:nth-child(odd)
+            {
+                -webkit-font-smoothing: antialiased;
+                font-family: "Lucida Console, Courier New", monospace;
+                display: block;
+                white-space: pre;
+                background-color: #E0E0E0; // DEBUG: green;
+            }
+
+            div.defn
+            {
+                border-width: 1px;  border-style: solid; border-color: gray;
+                padding-left: 2em;
+            }
+
+            div.eve { font-family: "fixed;Courier"; white-space: pre; background: #E0E0E0; }
+            div.odd { font-family: "fixed;Corrier"; white-space: pre; background: #F0F0F0; }
+
+            div.pre
+            {
+                -webkit-font-smoothing: antialiased;
+                font-family: monospace;
+                white-space: pre;
+                padding-left: 2em;
+                padding-top: 0;
+            }
+
+            span.i
+            {
+                color: #00F;
+            }
+
+            span.bracket
+            {
+                color: #000;
+                font-weight: bold;
+            }
+
+            span.brace
+            {
+                color: #000;
+                font-weight: bold;
+            }
+
+            span.char
+            {
+                color      : #088; // cyan
+                font-weight: bold;
+            }
+
+            span.code
+            {
+                background-color: #EEE; // grey
+            }
+
+            span.comment
+            {
+                color      : #080;
+                font-weight: bold;
+            }
+
+
+            span.keyword
+            {
+                color      : #08F; // Baby blue
+                font-weight: bold;
+            }
+
+            span.digit
+            {
+                color      : #F80; // orange
+                font-weight: bold;
+            }
+
+            span.eg
+            {
+                color:red;
+                font-weight:bold;
+            }
+
+            span.exp
+            {
+                color: #F00;
+            }
+
+            span.note
+            {
+                color      : #F80; // orange
+                font-weight: bold;
+            }
+
+            span.op
+            {
+                color: #00F;
+                font-weight: bold;
+            }
+
+            span.paren
+            {
+                color: #00F;
+                font-weight: bold;
+            }
+
+//            code.eve P:nth-child(n+2) { background:#00FFFF; }
+            code.eve { width="80%"; font-family: "fixed;Courier"; white-space: pre; background: #80F0F0; }
+            code.odd { width="80%"; font-family: "fixed;Corrier"; white-space: pre; background: #F0F0F0; }
+
+            pre
+            {
+                padding-left: 3em;
+            }
+
+//            pre.code:nth-child(even)
+//            {
+//                background-color: blue; // #EEE; // grey
+//            }
+//
+//            pre.code:nth-child(odd)
+//            {
+//                background-color: red; // #DDD; // grey
+//            }
+
+            font.dif
+            {
+                color      : #F00;
+            }
+
+            p
+            {
+                -webkit-margin-after: 4px;
+                margin: 1em;
+                padding-left: 0em;
+            }
+        </style>
+<!--
+        <script>
+function itoa( n, base )
+{
+    if( !base )
+         base = 10;
+
+    var DIGITS = "0123456789ABCDEF";
+    var text   = "";
+
+    do
+    {
+       var remainder = n %  base
+       var quotient  = (n - remainder) / base;
+        text += DIGITS[ remainder ];
+      n = quotient;
+    } while (n > 0)
+
+    return text.split("").reverse().join("");
+}
+console.log( "0xFFFFFFFF = %s", itoa( 0xFFFFFFFF, 10 ) );
+        </script>
+-->
+    </head>
+<body>
+
+<h1>Understanding Permutations and Combinations for Programmers:</h1>
+The beautiful symmetry of permutations, combinations, and itoa().
+<p></p>
+<h1>Table of Contents</h1>
+
+<table>
+        <tr><td><a href="#Introduction">Introduction   </a></td></tr>
+        <tr><td><a href="#Context"     >Context        </a></td></tr>
+        <tr><td><a href="#Permutations">Permutations   </a></td></tr>
+        <tr><td><a href="#PermDefn"    > * Definition  </a></td></tr>
+        <tr><td><a href="#PermExplain" > * Explanation </a></td></tr>
+        <tr><td><a href="#PermExample" > * Example     </a></td></tr>
+        <tr><td><a href="#PermPrint"   > * Printing    </a></td></tr>
+        <tr><td><a href="#PermCode"    > * Code        </a></td></tr>
+        <tr><td><a href="#Combinations">Combinations   </a></td></tr>
+        <tr><td><a href="#CombDefn"    > * Definition  </a></td></tr>
+        <tr><td><a href="#CombExplain" > * Explanation </a></td></tr>
+        <tr><td><a href="#CombExample" > * Example     </a></td></tr>
+        <tr><td><a href="#CombPrint"   > * Printing    </a></td></tr>
+        <tr><td><a href="#CombCode"    > * Code        </a></td></tr>
+        <tr><td><a href="#Summary"     > * Summary     </a></td></tr>
+        <tr><td><a href="#References"  > * References  </a></td></tr>
+</table>
+
+<a id="Introduction"> 
+<h2>Introduction</h2>
+</a>
+
+<p>
+First, I need to apologize in advance for being extremely verbose.
+ I hate when authors leave out "missing details" and the reader is left scratching their head trying to figure out what they "don't get."
+ As such I've provided step-by-step details so (hopefully) there is no ambuigity.
+ The down-side is that explainations might be tedious for some.
+ Please bear with me. Thank-you!
+</p>
+<a id="Context">
+<h2>The Context</h2>
+</a>
+<p>
+Back in my college days I never really felt comfortable with permutations and combinations.
+ I am a visual person and also like to have an intuitive sense / feel for mathemetical concepts and operations.
+ Years later I was working on a certain combinations problem; here is a simplified version:
+</p>
+<p>
+Given the sequence of characters:
+</p>
+<pre>
+<span class="char">DAC</span>
+</pre>
+<p>
+I had these questions...
+</p>
+<ul>
+<li> What is the previous permutation?</li>
+<li> What is the next permutation?    </li>
+<li> What is the previous combination?</li>
+<li> What is the next combination?    </li>
+<li> If we enumerated all the permutations assinging each of them an unique number,
+ then how would we convert that unique number to the permutation?</li><ul><li>And vice versa?</li></ul>
+<li> If we enumerated all the combinations assigning each of them an unique number,
+ then how would we convert that unique number to the combination?</li><ul><li>And vice versa?</li></ul>
+</ul>
+
+<p>
+After thinking about and working though the math I finally grokked some insight that helped me completely understand them.
+ I saw their beautiful symmetry hidden within and wondered how come my Computer Science professors never taught me this simple way to "get the big picture" before?</p>
+
+<p>Here is that secret to understanding Permutations and Combinations for programmers ...
+</p>
+
+<a id="Permutations">
+<h2>Permutations</h2>
+</a>
+<a id="PermDefn">
+<h3>Permutation Definition</h3>
+</a>
+<p>
+First, what <i>is</i> a permutation?  The standard definition is:
+</p>
+<div class="defn">
+<i>Permutation:</i><b> All possible arrangements of a set where the order <b>is</b> important.</b>
+</div>
+
+<p>
+A more formal Mathematical definition would read:
+</p>
+<div class="eg">Definition 1: <i>Permutation</i></div>
+<div class="ex">
+<!-- OLD
+Given: Set S with b elements in it and a number n with d digits,
+Then : All digits are denoted rd-1 ... r0 and each digit is one of the elements in the set S.
+-->
+Given:<br>
+ &nbsp; * An entry <i>n</i> with <span class="i"><i>d</i></span> digits,<br>
+ &nbsp; * And a set <i>S</i> with <span class="i"><i>b</i></span> elements in it where each element is a digti and denoted <span class="i">r</span><sub>d-1</sub> ... <span class="i">r</span><sub>0</sub><br>
+<br>
+Then:<br>
+ &nbsp; * Entry <i>n</i> is one permutation if each digit is composed of only elements from the set <i>S</i>.<br>
+</div>
+
+<p>
+And we would write the expression as:
+</p>
+<div class="defn">
+<div class="pre">
+n = r<sub>d-1</sub>*b<sup>(d-1)</sup> + r<sub>d-2</sub>*b<sup>(d-2)</sup> + ... + r<sub>1</sub>*b<sup>1</sup> + r<sub>0</sub>*b<sup>0</sup>
+
+</div>
+</div>
+
+<a id="PermExplain">
+<h3>Permutation Explanation</h3>
+</a>
+<p>
+Ugh. Whoa! Um, yeaaah, clear as mud. WTF does this even mean?!
+</p>
+<p>
+That looks rather hairy but we can forgive Mathematicians tending to
+ over-complicate concepts with their desire for <i>precise</i> notation this time.
+ We'll actually make use of this obtuse formula in a bit and see how it
+ <i>ironically</i> translates into simple, clean code!
+</p>
+<p>
+Now, whenever learning a new topic I like to leverage what I already know as a foundation to make learning the new topic easier.
+ So what the heck does that definition <i>really</i> mean anyways??
+ Let's work through an example and translate it into plain English.
+</p>
+
+<div class="eg">Example 1:</div>
+<p>
+Let's say we have a postive<sup>&dagger;</sup> 3 digit integer such as:
+</p>
+<pre>
+893
+</pre>
+<sup>&dagger;</sup> <span class="i"><b>Note</b>:</span> We are going to ignore negative numbers for the time being.
+<p>
+The integer implies a <a href="http://en.wikipedia.org/wiki/Decimal">decimal</a> number
+ therefore our set <i>S</i> contains the 10 decimal digits that we all learnt from elementary school: 
+</p>
+(Using C notation)
+<div class="code">
+    char S = { '<span class="char">0</span>','<span class="char">1</span>','<span class="char">2</span>','<span class="char">3</span>','<span class="char">4</span>','<span class="char">5</span>','<span class="char">6</span>','<span class="char">7</span>','<span class="char">8</span>','<span class="char">9</span>' };
+
+</div>
+
+<p>Q. Why did I write the set elements with single quotes and not as the more simple?
+
+<div class="code">
+    int S = { <span class="digit">0</span>,<span class="digit">1</span>,<span class="digit">2</span>,<span class="digit">3</span>,<span class="digit">4</span>,<span class="digit">5</span>,<span class="digit">6</span>,<span class="digit">7</span>,<span class="digit">8</span>,<span class="digit">9</span> };
+
+</div>
+
+
+<p>
+A. I want to highlight that each set <b>element</b> is a <b>character</b> (or string) instead of being <i>perceived</i> as a number.  Later on you could have a set's elements be an indirect index (or pointer) into an array of characters/strings but for now we'll focus on each element being a direct character.
+</p>
+<p>
+Forgive me for being tedious -- you'll see the point shortly ...
+</p>
+<p>
+Writing our number out in long form (using Definition 1):
+</p>
+<pre>
+ n = <span class="i">r<sub>d-1</sub></span>*10<span class="exp"><sup>(d-1)</sup></span> + <span class="i">r<sub>d-2</sub></span>*10<span class="exp"><sup>(d-2)</sup></span> + ... + <span class="i">r<sub>1</sub></span>*10<span class="exp"><sup>1</sup></span> + <span class="i">r<sub>0</sub></span>*10<span class="exp"><sup>0</sup></span>
+</pre>
+<p>
+The coefficients are as we expect:
+</p>
+<pre>
+     r2 = <span class="i">8</span>
+     r1 = <span class="i">9</span>
+     r0 = <span class="i">3</span>
+</pre>
+<p>
+Filling in the long form: 
+</p>
+<pre>
+n = <span class="i">8</span>*10<span class="exp"><sup>2</sup></span> + <span class="i">9</span>*10<span class="exp"><sup>1</sup></span> + <span class="i">3</span></sup>*10<span class="exp"><sup>0</sup></span>
+  = <span class="i">8</span>*100 + <span class="i">9</span>*10 + <span class="i">3</span>*1
+  = 893
+</pre>
+<p>
+Which is simply <b>one</b> number out of <b>all</b> 3-digit numbers ranging from 000 ... 999 (inclusive):
+</p>
+<pre>
+    <span class="digit">000</span>
+     :
+    <span class="digit">893</span>
+     :
+    <span class="digit">999</span>
+</pre>
+<p>
+Now it should be pretty obvious that any random plain integer is a permutation!<p>
+</p>
+
+<div class="ex">
+<span class="eg">
+ <br>
+ Key insight: </span>
+ The number of elements in the set, <span><i>b</i></span>, is the number base!
+ <br>
+ <br>
+</div>
+<p>
+We'll explore what this means in a little bit when we go to print the permutations and combinations.
+</p>
+
+
+<a id="PermExample">
+<h3>Permutation Example</h3>
+</a>
+<div class="eg">Example 2:</div>
+<p>
+Let's apply this to a different permutation set one beyond the trivial integers. Suppose we are given the permutation that I mentioned in the introduction:
+</p>
+<pre>
+<span class="char">DAC</span>
+</pre>
+<p>
+From this we can deduce the 4-element set:
+</p>
+<pre>
+ S = { '<span class="char">A</span>', '<span class="char">B</span>', '<span class="char">C</span>, '<span class="char">D</span>' }
+</pre>
+<p>
+Let's now enumerate all the 3 "digit" permutations and assign them an unique number when we write them out:
+</p>
+
+<!--
+AAA= 0   BAA=16   CAA=32   DAA=48
+AAB= 1   BAB=17   CAB=33   DAB=49
+AAC= 2   BAC=18   CAC=34   DAC=50
+AAD= 3   BAD=19   CAD=35   DAD=51
+
+ABA= 4   BBA=20   CBA=36   DBA=52
+ABB= 5   BBB=21   CBB=37   DBB=53
+ABC= 6   BBC=22   CBC=38   DBC=54
+ABD= 7   BBD=23   CBD=39   DBD=55
+
+ACA= 8   BCA=24   CCA=40   DCA=56
+ACB= 9   BCB=25   CCB=41   DCB=57
+ACC=10   BCC=26   CCC=42   DCC=58
+ACD=11   BCD=27   CCD=43   DCD=59
+
+ADA=12   BDA=28   CDA=44   DDA=60
+ADB=13   BDB=29   CDB=45   DDB=61
+ADC=14   BDC=30   CDC=46   DDC=62
+ADD=15   BDD=31   CDD=47   DDD=63
+-->
+
+<div class="eg">Permutations of A, B, C, and D with length 3:</div>
+<div class="defn">
+<pre>
+#<span class="i"> 0 </span>AAA    #<span class="i">16 </span>BAA    #<span class="i">32 </span>CAA    #<span class="i">48 </span>DAA
+#<span class="i"> 1 </span>AAB    #<span class="i">17 </span>BAB    #<span class="i">33 </span>CAB    #<span class="i">49 </span>DAB
+#<span class="i"> 2 </span>AAC    #<span class="i">18 </span>BAC    #<span class="i">34 </span>CAC    #<span class="i">50 </span>DAC
+#<span class="i"> 3 </span>AAD    #<span class="i">19 </span>BAD    #<span class="i">35 </span>CAD    #<span class="i">51 </span>DAD
+
+#<span class="i"> 4 </span>ABA    #<span class="i">20 </span>BBA    #<span class="i">36 </span>CBA    #<span class="i">52 </span>DBA
+#<span class="i"> 5 </span>ABB    #<span class="i">21 </span>BBB    #<span class="i">37 </span>CBB    #<span class="i">53 </span>DBB
+#<span class="i"> 6 </span>ABC    #<span class="i">22 </span>BBC    #<span class="i">38 </span>CBC    #<span class="i">54 </span>DBC
+#<span class="i"> 7 </span>ABD    #<span class="i">23 </span>BBD    #<span class="i">39 </span>CBD    #<span class="i">55 </span>DBD
+
+#<span class="i"> 8 </span>ACA    #<span class="i">24 </span>BCA    #<span class="i">40 </span>CCA    #<span class="i">56 </span>DCA
+#<span class="i"> 9 </span>ACB    #<span class="i">25 </span>BCB    #<span class="i">41 </span>CCB    #<span class="i">57 </span>DCB
+#<span class="i">10 </span>ACC    #<span class="i">26 </span>BCC    #<span class="i">42 </span>CCC    #<span class="i">58 </span>DCC
+#<span class="i">11 </span>ACD    #<span class="i">27 </span>BCD    #<span class="i">43 </span>CCD    #<span class="i">59 </span>DCD
+
+#<span class="i">12 </span>ADA    #<span class="i">28 </span>BDA    #<span class="i">44 </span>CDA    #<span class="i">60 </span>DDA
+#<span class="i">13 </span>ADB    #<span class="i">29 </span>BDB    #<span class="i">45 </span>CDB    #<span class="i">61 </span>DDB
+#<span class="i">14 </span>ADC    #<span class="i">30 </span>BDC    #<span class="i">46 </span>CDC    #<span class="i">62 </span>DDC
+#<span class="i">15 </span>ADD    #<span class="i">31 </span>BDD    #<span class="i">47 </span>CDD    #<span class="i">63 </span>DDD
+</pre>
+</div>
+<p>
+So we see that "DAC" is permutation #<span class="i">50</span>.
+</p>
+<p>
+Q. How is the table generated?
+</p>
+<p>
+A. One can see the order within. i.e. The first column has the first element, a constant '<span class="char">A</span>' and likewise for each successive column.
+ The second digit in each column cycles through the set elements for each group of 4 rows, 
+ and the last digit in each column rotates through the set elements every row.
+</p>
+<p>
+The order is akin to your standard <a href="http://anthony.liekens.net/images/clocklegend.jpg">powers-of-2 in binary</a>, except in base 4 instead of base 2.
+</p>
+<div class="eg">Example 3:</div>
+<pre>
+             +------ Every 8 rows switches to next digit
+             |
+             |  ____ Every 2 rows switches to next digit
+             v v 
+  #<span class="i"> 0</span>  &compfn;&compfn;&compfn;&compfn;  0000<sub>2</sub>
+  #<span class="i"> 1</span>  &compfn;&compfn;&compfn;&bullet;  0001<sub>2</sub>
+  #<span class="i"> 2</span>  &compfn;&compfn;&bullet;&compfn;  0010<sub>2</sub>
+  #<span class="i"> 3</span>  &compfn;&compfn;&bullet;&bullet;  0011<sub>2</sub>
+  #<span class="i"> 4</span>  &compfn;&bullet;&compfn;&compfn;  0100<sub>2</sub>
+  #<span class="i"> 5</span>  &compfn;&bullet;&compfn;&bullet;  0101<sub>2</sub>
+  #<span class="i"> 6</span>  &compfn;&bullet;&bullet;&compfn;  0110<sub>2</sub>
+  #<span class="i"> 7</span>  &compfn;&bullet;&bullet;&bullet;  0111<sub>2</sub>
+  #<span class="i"> 8</span>  &bullet;&compfn;&compfn;&compfn;  1000<sub>2</sub>
+  #<span class="i"> 9</span>  &bullet;&compfn;&compfn;&bullet;  1001<sub>2</sub>
+  #<span class="i">10</span>  &bullet;&compfn;&bullet;&compfn;  1010<sub>2</sub>
+  #<span class="i">11</span>  &bullet;&compfn;&bullet;&bullet;  1011<sub>2</sub>
+  #<span class="i">12</span>  &bullet;&bullet;&compfn;&compfn;  1000<sub>2</sub>
+  #<span class="i">13</span>  &bullet;&bullet;&compfn;&bullet;  1001<sub>2</sub>
+  #<span class="i">14</span>  &bullet;&bullet;&bullet;&compfn;  1010<sub>2</sub>
+  #<span class="i">15</span>  &bullet;&bullet;&bullet;&bullet;  1011<sub>2</sub>
+              ^ ^
+              : :__ Every 1 row  switches to next digit
+              : 
+              :____ Every 4 rows switches to next digit
+</pre>
+
+<p>
+Q. <b>How</b> can we calculate <i>how to</i> <i>map</i> #<span>50</span> directly to "DAC" <b>without</b> a table lookup?
+</p>
+<p>
+This example <b>is in base 4</b> but let's write out the permutation unique number in binary to make it easier to compute.
+</p>
+<p>
+First, enumerate our set elements:
+</p>
+<div class="ex"><pre><table>
+    <tr border=1><td>Decimal </td><td>Binary </td><td>Element </td></tr>
+    <tr><td>#<span class="i">0<span></td><td>00<sub>2</sub></td><td><span class="char">A</span></td></tr>
+    <tr><td>#<span class="i">1<span></td><td>01<sub>2</sub></td><td><span class="char">B</span></td></tr>
+    <tr><td>#<span class="i">2<span></td><td>10<sub>2</sub></td><td><span class="char">C</span></td></tr>
+    <tr><td>#<span class="i">3<span></td><td>11<sub>2</sub></td><td><span class="char">D</span></td></tr>
+</table></pre></div>
+<p>
+Second, convert #<span>50</span> in base 10, designated 50<sub>10</sub>, to base 2 which is 110010<sub>2</sub>.
+</p>
+<p>
+Third, inspecting our permutation number in binary makes it trivial to see which set elements are in which position.
+ Since each element takes 2 bits, we can grouping the binary number into groups of 2 bits, and inserting spaces: 110010<sub>2</sub> -> 11 00 10<sub>2</sub> then:
+</p>
+<pre>
+ #<span>50</span><sub>10</sub> = 11<sub>2</sub> 00<sub>2</sub> 10<sub>2</sub>
+          3   0   2
+          <span class="char">D   A   C</span>
+</pre>
+
+<hr>
+
+<a id="PermPrint">
+<h3>itoa() aka printf()</h3>
+</a>
+<p>
+If want to converted the permutation #<span>50</span> to the printable string "<span class="char">DAC</span>" how would we do that?
+</p>
+<p>
+Before we answer that we need to digress slightly. Two very handy math operators are:
+</p>
+<pre>
+    '/' integer division            aka <b>Linear Division</b>
+    '%' integer modulas (or modulo) aka <b>Cyclic Division</b>
+</pre>
+<p>
+Recall from school that integer division leaves a quotient and a remainder (which could be zero.)
+</p>
+<pre>
+    Dividend
+    -------- = Quotient, along with an (optional) Remainder
+    Divisor
+</pre>
+<p>If you are not familiar with the <b>modulas operator</b> but <i>do</i> know how to tell time I'll <b>prove it to you</b>
+ that you are <i>already</i> familiar with modulas arithmetic using two different bases!
+</p>
+</p>
+<pre>
+   Hours    Base 12
+   Minutes  Base 60
+</pre>
+<p>
+Let's focus on the minutes for simplicity. When it is 10:59 and 5 minutes go by the time
+ isn't 10:64 but 11:04 since minutes are always in the range <span>0</span> .. <span>59</span>.
+</p>
+<pre>
+    minutes  = (59 + 5) mod 60
+             = 64 mod 60
+             = 64 - 60
+             = 4
+</pre>   
+</p>
+<p>
+Likewise for hours: When it is 11:00, and 2 hours go by, the time isn't 11:00 + 2:00 = 13:00,
+ it is 1:00 (unless you live on 24 hour <a href="http://en.wikipedia.org/wiki/24-hour_clockm">Military time</a>
+ -- they can use the equivalent example 2300 + 0200 = 2500 = 0100 instead.)
+</p>
+<p>
+Everytime we go over 12, we subtract 12.  Ergo our hour time is aways in the range: <span>0</span> .. <span>11</span>.</p>
+<p>Wait! There isn't a 0:00 time in normal usage! Well, actully there <i>is</i> <b>but</b> we just <b>display</b> it
+ as 12 because <i>conceptually</i> 0 and 12 are <b>equivalent mod 12</b>.
+ (Again, military time uses 0000 to represent midnight.)
+</p>
+<p>
+ See you <b>CAN</b> do <a href="http://www.amazon.com/Adventurers-Guide-Number-Theory-Mathematics/dp/0486281337">Number Theory</a> -- you <b>are</b> smarter then you think! :-)
+ Thus when we use the standard "hours:minutes" time format I hope there is no need to let 
+ this talk of <i>different bases</i> intimidate you.
+</p>
+<p>A quick review of modulas notation:</p>
+<pre>
+   C/C++/Javascript                  Mathematics
+   Remainder = Dividend % Divisor    Dividend &equiv; Remainder (mod Divisor)
+</pre>
+<div class="eg">Example 4:</div>
+<pre>
+   rem = 13 % 12;                    13 &equiv; 1 (mod 12)
+</pre>
+<p>
+There are other times when it is handy to directly calculate the <a href="http://en.wikipedia.org/wiki/Modulo_operation">remainder</a>.  This is one of those times. :-)
+</p>
+<p>
+Examining the definition of permutations we notice a repeated pattern:
+</p>
+<pre>
+ ... + <span>r</span><sub>#</sub>*b<span class="exp"><sup>#</sup></span> + ...
+</pre>
+<p>
+If we take the number <b>n mod b</b>, or <b>n % b</b>, we can "peel" off one digit at a time to get <span>r</span><sub>i</sub>.
+ That is <b>r = n mod b</b> returns a number, r, in the range:
+</p>
+<pre>
+   0 .. (b-1)
+</pre>
+<p>
+Hmm, since we start counting arrays from zero, we can use r as an <b>index</b> in our set; which can <i>also</i> be thought of as an array of elements!
+ We will need to keep track of the <b>order</b> to make sure we meet the definition of permutations but that is an easy detail to track.
+</p>
+
+<div class="eg">Algorithm 1: <i>itoa_perm()</i></div>
+<div class="defn">
+<pre>
+Given: number n in base b
+
+Pseudo-code:
+   output := ""
+   for each digit in n
+   begin
+      r := n % base;
+      n := n / base;
+      e := set[ r ];
+      output := e + output; // prepend: right to left
+   end
+</pre>
+</div>
+<p>
+Working through our #<span>50</span> example in base 4.
+</p>
+<pre>
+      n    r = n % b   n / b      Set[ r ]
+<hr>
+      50   50 % 4      50/4     
+           =2          12         '<span class="char">C</span>'
+<hr>
+      12   12 % 4      12/4     
+           =0          3          '<span class="char">A</span>'
+<hr>
+      3    3 % 4       3/4      
+           =3                     '<span class="char">D</span>'
+<hr>
+</pre>
+
+
+<h2>Permutation Code</h2>
+
+<p>
+If the set is hard-coded to only 10 elements (base 10) we end up with the canonical:
+<pre>
+    <b>printf( "%d" ); // itoa()</b>
+</pre>
+Let's clean up the algorithm making it more bulletproof so that it can handle any base from 2 to 16.
+</p>
+<div class="ex">
+      <div class="code">
+</div><div class="code">#include &lt;stdio.h&gt;
+</div><div class="code">#include &lt;stdint.h&gt;
+</div><div class="code">
+</div><div class="code">char* itoa( uint32_t n, int base = 10 )
+</div><div class="code">{
+</div><div class="code">    const  char set[]  =  "0123456789ABCDEF";
+</div><div class="code">    /* */  int  length = 0;
+</div><div class="code">
+</div><div class="code">    const  int  MAX_DIGITS = 32;
+</div><div class="code">    static char output[ MAX_DIGITS+1 ]; // base 2 = max 32 binary digits + null
+</div><div class="code">
+</div><div class="code">    if (base <  2) base =  2;
+</div><div class="code">    if (base > 16) base = 16;
+</div><div class="code">
+</div><div class="code">    do
+</div><div class="code">    {
+</div><div class="code">        output[ length++ ] = set[ n % base ];
+</div><div class="code">        n /= base;
+</div><div class="code">    } while( n > 0 );
+</div><div class="code">
+</div><div class="code">    // String Reverse
+</div><div class="code">    output[ length ] = 0;
+</div><div class="code">    for( int i = 0; i < length/2; i++ )
+</div><div class="code">    {
+</div><div class="code">        char temp = output[ i ];                             // t <- D     
+</div><div class="code">                    output[ i ] = output[length-i-1];        //      D <- S
+</div><div class="code">                                  output[length-i-1] = temp; // t ------> S
+</div><div class="code">    }
+</div><div class="code">
+</div><div class="code">    return output;
+</div><div class="code">}
+</div><div class="code">
+</div><div class="code">int main()
+</div><div class="code">{
+</div><div class="code">    return printf( "%s\n", itoa( 0xDEADC0DE, 16 ) );
+</div><div class="code">}
+</div>
+</div>
+
+<p>
+We want the caller to be able to specify the elements in the set so we need to change that to a parameter
+ Also, let us actually re-write the inner loop to be a little more verbose for now -- we'll
+ see why when we get to combinations.
+ We'll also remove that clunky string reversal by putting the digits in their final place when we peel them off. :-)
+</p>
+<div class="eg">Forward Transform Permutation: <i>itoa_perm()</i></div>
+<div class="defn">
+<pre>
+char* itoa_perm( uint32_t n, const int base, int length, const char set[] = "0123456789ABCDEF" )
+{
+    const  int  MAX_DIGITS = 32;
+    static char output[ MAX_DIGITS + 1 ];
+
+    if (base <  2) base =  2;
+    if (base > 16) base = 16;
+
+    int r;
+    char *dst = output + MAX_DIGITS;
+    *dst-- = 0;
+
+    do
+    {
+        r = n % base;
+        n = n / base;
+        *dst-- = set[ r ]; // Perm: print right to left
+    } while (--length > 0);
+
+    return dst+1; // undershot start of output
+}
+</pre>
+</div>
+
+<p>
+And the corresponding Javascript code:
+</p>
+
+<pre>
+function itoa_perm( n, base, length )
+{
+    var DIGITS = "0123456789ABCDEF";
+    var text   = "";
+    var remainder, quotient;
+
+    if( base === undefined )
+        base = 10;
+
+    if( length === undefined )
+        length = n.length; // To.String.. // FIXME: TODO:
+
+    if (base <  2) base =  2;
+    if (base > 16) base = 16;
+
+    do
+    {
+        remainder = n %  base
+        quotient  = (n - remainder) / base;
+        text = DIGITS[ remainder ] + text; // prepend the digit in front
+        n = quotient;
+    } while (--length > 0);
+
+    // If not prepending digit in front, reverse the string
+    //return text.split("").reverse().join("");
+}
+</pre>
+
+<p>We'll explore the <b>reverse transform</b> <i>atoi_perm()</i> later.
+
+
+<h2>Combinations</h2>
+
+<a id="CombDefn">
+<h3>Combination Definition</h3>
+</a>
+
+<div class="defn">
+<i>Combinations:</i> a <b>subset</b> of permutations where order is <b>unimporant</b>.
+</div>
+<p>
+ What this means is that once an element is used -- it can't be used again for <i>that</i> combination.
+</p>
+
+<!--
+<pre>
+    <del>AA</del>  BA  CA  DA
+    AB  <del>BB</del>  CB  DB
+    AC  BC  <del>CC</del>  DC
+    AD  BD  CD  <del>DD</del>
+</pre>
+<pre>
+    AAA  BAA  CAA
+    AAB  BAB  CAB
+    AAC  BAC  CAC
+    
+    ABA  BBA  CBA
+    ABB  BBB  CBB
+    ABC  BBC  CBC
+
+    ACA  BCA  CCA
+    ACB  BCB  CCB
+    ACC  BCC  CCC
+</pre>
+-->
+<p>First, recall the permutations of the set A,B,C,D.
+
+<div class="eg">Permutations of A, B, C, and D:</div>
+<div class="defn">
+<pre>
+#<span class="i"> 0 </span>AAA    #<span class="i">16 </span>BAA    #<span class="i">32 </span>CAA    #<span class="i">48 </span>DAA
+#<span class="i"> 1 </span>AAB    #<span class="i">17 </span>BAB    #<span class="i">33 </span>CAB    #<span class="i">49 </span>DAB
+#<span class="i"> 2 </span>AAC    #<span class="i">18 </span>BAC    #<span class="i">34 </span>CAC    #<span class="i">50 </span>DAC
+#<span class="i"> 3 </span>AAD    #<span class="i">19 </span>BAD    #<span class="i">35 </span>CAD    #<span class="i">51 </span>DAD
+
+#<span class="i"> 4 </span>ABA    #<span class="i">20 </span>BBA    #<span class="i">36 </span>CBA    #<span class="i">52 </span>DBA
+#<span class="i"> 5 </span>ABB    #<span class="i">21 </span>BBB    #<span class="i">37 </span>CBB    #<span class="i">53 </span>DBB
+#<span class="i"> 6 </span>ABC    #<span class="i">22 </span>BBC    #<span class="i">38 </span>CBC    #<span class="i">54 </span>DBC
+#<span class="i"> 7 </span>ABD    #<span class="i">23 </span>BBD    #<span class="i">39 </span>CBD    #<span class="i">55 </span>DBD
+
+#<span class="i"> 8 </span>ACA    #<span class="i">24 </span>BCA    #<span class="i">40 </span>CCA    #<span class="i">56 </span>DCA
+#<span class="i"> 9 </span>ACB    #<span class="i">25 </span>BCB    #<span class="i">41 </span>CCB    #<span class="i">57 </span>DCB
+#<span class="i">10 </span>ACC    #<span class="i">26 </span>BCC    #<span class="i">42 </span>CCC    #<span class="i">58 </span>DCC
+#<span class="i">11 </span>ACD    #<span class="i">27 </span>BCD    #<span class="i">43 </span>CCD    #<span class="i">59 </span>DCD
+
+#<span class="i">12 </span>ADA    #<span class="i">28 </span>BDA    #<span class="i">44 </span>CDA    #<span class="i">60 </span>DDA
+#<span class="i">13 </span>ADB    #<span class="i">29 </span>BDB    #<span class="i">45 </span>CDB    #<span class="i">61 </span>DDB
+#<span class="i">14 </span>ADC    #<span class="i">30 </span>BDC    #<span class="i">46 </span>CDC    #<span class="i">62 </span>DDC
+#<span class="i">15 </span>ADD    #<span class="i">31 </span>BDD    #<span class="i">47 </span>CDD    #<span class="i">63 </span>DDD
+</pre>
+</div>
+<p>
+Next, cross off entries that have duplicates elements:
+</p>
+<div class="eg">Combinations of A, B, C, and D with permutations crossed off:</div>
+<div class="defn">
+<pre>
+<del>#<span> - </span>AAA</del>    <del>#<span>16 </span>BAA</del>    <del>#<span> - </span>CAA</del>    <del>#<span> - </span>DAA</del>
+<del>#<span> - </span>AAB</del>    <del>#<span>17 </span>BAB</del>    #<span>12 </span>CAB    #<span>18 </span>DAB
+<del>#<span> - </span>AAC</del>    #<span> 6 </span>BAC    <del>#<span> - </span>CAC</del>    #<span>19 </span>DAC
+<del>#<span> - </span>AAD</del>    #<span> 7 </span>BAD    #<span>13 </span>CAD    <del>#<span> - </span>DAD</del>
+
+<del>#<span> - </span>ABA</del>    <del>#<span> - </span>BBA</del>    #<span>14 </span>CBA    #<span>20 </span>DBA
+<del>#<span> - </span>ABB</del>    <del>#<span> - </span>BBB</del>    <del>#<span> - </span>CBB</del>    <del>#<span>20 </span>DBB</del>
+#<span> 0 </span>ABC    <del>#<span> - </span>BBC</del>    <del>#<span> - </span>CBC</del>    #<span>21 </span>DBC
+#<span> 1 </span>ABD    <del>#<span> - </span>BBD</del>    #<span>15 </span>CBD    <del>#<span>55 </span>DBD</del>
+
+<del>#<span> - </span>ACA</del>    #<span> 8 </span>BCA    <del>#<span> - </span>CCA</del>    #<span>22 </span>DCA
+#<span> 2 </span>ACB    <del>#<span> - </span>BCB</del>    <del>#<span> - </span>CCB</del>    #<span>23 </span>DCB
+<del>#<span> - </span>ACC</del>    <del>#<span> - </span>BCC</del>    <del>#<span> - </span>CCC</del>    <del>#<span> - </span>DCC</del>
+#<span> 3 </span>ACD    #<span> 9 </span>BCD    <del>#<span> - </span>CCD</del>    <del>#<span> - </span>DCD</del>
+
+<del>#<span> - </span>ADA</del>    #<span>10 </span>BDA    #<span>16 </span>CDA    <del>#<span> - </span>DAA</del>
+#<span> 4 </span>ADB    <del>#<span>-- </span>BDB</del>    #<span>17 </span>CDB    <del>#<span> - </span>DAB</del>
+#<span> 5 </span>ADC    #<span>11 </span>BDC    <del>#<span> - </span>CDC</del>    <del>#<span> - </span>DAC</del>
+<del>#<span> - </span>ADD</del>    <del>#<span>-- </span>BDD</del>    <del>#<span> - </span>CDD</del>    <del>#<span> - </span>DAD</del>
+</pre>
+</div>
+
+<p>Lastly, cleaning it up we are left with:</p>
+</p>
+<div class="eg">Combinations of A, B, C, and D (with <b>Natural Mapping</b>)</div>
+<div class="defn">
+<pre>
+#<span class="i"> 0 </span>ABC    #<span class="i"> 6 </span>BAC    #<span class="i">12 </span>CAB    #<span class="i">18 </span>DAB
+#<span class="i"> 1 </span>ABD    #<span class="i"> 7 </span>BAD    #<span class="i">13 </span>CAD    #<span class="i">19 </span>DAC
+#<span class="i"> 2 </span>ACB    #<span class="i"> 8 </span>BCA    #<span class="i">14 </span>CBA    #<span class="i">20 </span>DBA
+#<span class="i"> 3 </span>ACD    #<span class="i"> 9 </span>BCD    #<span class="i">15 </span>CBD    #<span class="i">21 </span>DBC
+#<span class="i"> 4 </span>ADB    #<span class="i">10 </span>BDA    #<span class="i">16 </span>CDA    #<span class="i">22 </span>DCA
+#<span class="i"> 5 </span>ADC    #<span class="i">11 </span>BDC    #<span class="i">17 </span>CDB    #<span class="i">23 </span>DCB
+</pre>
+</div>
+</div>
+
+<p>
+This begs the question:
+</p>
+<ul>
+<li>How do we calculate the <b>forward</b> transform? i.e. Given #<span>15</span> calculate "DAC" ?</li>
+<li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number #<span>15</span></li>
+</ul>
+<p>Hold-up!  Didn't I make a typo? DAC is #<span>19</span>, not #<span>15</span>!
+ There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen. For example we could have this "forward mapping":
+</p>
+<div class="defn">
+<pre>
+#<span class="i"> 0 </span>ABC    #<span class="i"> 1 </span>BAC    #<span class="i"> 2 </span class="i">CAB    #<span class="i"> 3 </span>DAB
+#<span class="i"> 4 </span>ACB    #<span class="i"> 5 </span>BCA    #<span class="i"> 6 </span class="i">CBA    #<span class="i"> 7 </span>DBA
+#<span class="i"> 8 </span>ADB    #<span class="i"> 9 </span>BDA    #<span class="i">10 </span class="i">CDA    #<span class="i">11 </span>DCA
+#<span class="i">12 </span>ABD    #<span class="i">13 </span>BAD    #<span class="i">14 </span class="i">CAD    #<span class="i">15 </span>DAC
+#<span class="i">16 </span>ACD    #<span class="i">17 </span>BCD    #<span class="i">18 </span class="i">CBD    #<span class="i">19 </span>DBC
+#<span class="i">20 </span>ADC    #<span class="i">21 </span>BDC    #<span class="i">22 </span class="i">CDB    #<span class="i">23 </span>DCB
+</pre>
+</div>
+<p>Or this mapping:</p>
+<div class="defn">
+<pre>
+#<span class="digit"> 0 </span>ADC    #<span class="digit"> 1 </span class="digit">BAC    #<span class="digit"> 2 </span>CAD    #<span> 3 </span>DAC
+#<span class="digit"> 4 </span>ABD    #<span class="digit"> 5 </span class="digit">BDA    #<span class="digit"> 6 </span>CBA    #<span> 7 </span>DBA
+#<span class="digit"> 8 </span>ACD    #<span class="digit"> 9 </span class="digit">BCA    #<span class="digit">10 </span>CDA    #<span>11 </span>DCA
+#<span class="digit">12 </span>ADB    #<span class="digit">13 </span class="digit">BAD    #<span class="digit">14 </span>CAB    #<span>15 </span>DAB
+#<span class="digit">16 </span>ABC    #<span class="digit">17 </span class="digit">BDC    #<span class="digit">18 </span>CBD    #<span>19 </span>DBC
+#<span class="digit">20 </span>ACB    #<span class="digit">21 </span class="digit">BCD    #<span class="digit">22 </span>CDB    #<span>23 </span>DCB
+</pre>
+</div>
+<p>
+Does it matter <i>which</i> enumaration ordering we use??<br>
+For example, Alice might map:
+</p>
+<div class="ex">
+<pre>
+#<span class="i"> 0 </span>ABC
+#<span class="i"> 1 </span>BAC
+  :
+#<span class="i">23 </span>DCB
+</pre>
+</div>
+
+<p>
+Bob might chose (the reverse numbering of Alice)
+</p>
+<div class="ex"><pre>
+#<span class="i"> 23 </span>ABC
+#<span class="i"> 22 </span>BAC
+  :
+#<span>  0 </span>DCB
+</pre>
+</div>
+
+<p>
+And Charles might chose (Alice's scheme +1):
+</p>
+<div class="ex">
+<pre>
+#<span class="i"> 1 </span>ABC
+#<span class="i"> 2 </span>BAC
+ :
+#<span class="i"> 0 </span>DCB
+</pre>
+</div>
+
+<p>
+No, the number we assign to each combination entry doesn't matter <b>as long as we enumerate ALL combinations.</b>
+ This is why it is important to use the <i>same mapping for the forward and inverse.</i>
+</p>
+</pre>
+<p><b>Meta-Exercise</b>: How many different ways could we enumerate the set of ABC assigning an unique number to each combination?
+</p>
+<p>
+Getting back to where we left off .. how do we calculate what the unique enumeration
+ is so we can derive how to print combinations?
+ We'll also pretend we don't know the inital 'n' is -- however let's "do the math" and
+ see what operations are done on it.  Since we already know the partial results we can
+ use simple logic to deduce the mathematical operations that need to be performed on it
+ to reach the next step.
+</p>
+<pre>
+    Set = { '<span class="char">A</span>','<span class="char">B</span>','<span class="char">C</span>','<span class="char">D</span>' }  a<sub>2</sub> = Set[ (n   ) % 4 = 3 ] = '<span class="char">D</span>'
+
+    Set = { '<span class="char">A</span>, '<span class="char">B</span>', '<span class="char">C</span>'    }  a<sub>1</sub> = Set[ (n/4 ) % 3 = 0 ] = '<span class="char">A</span>'
+
+    Set = { '<span class="char">B</span>, '<span class="char">C</span>'         }  a<sub>0</sub> = Set[ (n/12) % 2 = 1 ] = '<span class="char">C</span>'
+</pre>
+<p>
+Hmmm, we are closer, but still don't have an obvious algorithm.
+</p>
+<p>Recall that in permutations each succesive digit was multiplied by the constant base raised to a increasing power.
+ In combinations the base keeps shrinking. Why?  In <i>permutations</i> we <b>can</b> re-use elements, in <i>combinations</i> we <b>can't.</b>
+ A simple way to think of this is to pretend we have a bag with the 4 elements in it:
+<pre>
+    Set = { '<span class="char">A</span>','<span class="char">B</span>','<span class="char">C</span>','<span class="char">D</span>' } 
+</pre>
+<p>
+Every time we "peel off a digit", we pull an element out of the bag. 
+ The difference is that once we pull '<span class="char">D</span>' out of the bag we <b>leave it out</b> for the rest of <b>that</b> combination.
+ In essence, this means:
+</p>
+<div class="eg">Algorithm difference between Permutations and Combinations:</div>
+<div class="ex">
+For <b>permutations</b> we divide the numerator by a <b>constant</b> amount.
+<br>
+For <b>combinations</b> we divide the numerator by a <b>variable</b> amount.
+</div>
+</div>
+<p>
+Recall that the heart of the permutations itoa_perm() was this:
+</p>
+
+<pre>
+    do
+    {
+        r = n % base;
+        n = n / base;
+        *dst-- = set[ r ];
+    } while (--length > 0);
+
+</pre>
+<p>
+Let's gently massage this to behave how combinations are defined.
+</p>
+<p>
+First, the base must decrease:
+</p>
+<pre>
+    {
+        r = n % base;
+        n = n / base;
+        *dst++ = set[ r ];
+
+<span class="note">        base--;</span><span class="comment"> // Combination = decreasing base</span>
+    }
+</pre>
+<p>
+Is that enough?  No, because we haven't actually <b>removed</b> the element 'r' from the set to prevent re-use!
+Let's call the set passed into itoa() our <b>master set</b>,
+ and the set used for printing the <b>working set</b> as we remove elements.  We'll also need to initialize our working set.
+</p>
+
+<pre>
+char* itoa_comb( uint32_t n, int base, int length, const char masterSet[] = "0123456789ABCDEF" )
+{
+    const  int  MAX_DIGITS = 32;
+    static char output[ MAX_DIGITS + 1 ];
+
+    static char set[ MAX_DIGITS ];
+    memcpy( set, masterSet, base );
+
+    int r;
+    char *dst = output; // print left to right!
+
+    do
+    {
+        r = n % base;
+        n = n / base;
+        *dst++ = set[ r ];
+
+<span class="note">        base--;</span><span class="comment"> // Combination = decreasing base</span>
+<span class="note">        memcpy( set + r, set + r + 1, base - r );</span><span class="comment"> // Remove set[r] element</span>
+    } <b>while</b> (--length > <span>0</span>);
+
+    *dst = 0;
+    return output;
+}
+</pre>
+<p>
+Similiar to what we did with permutations let us walk through the combination steps to verify our algorithm..
+</p>
+<pre>
+      n    n % b     n / b    Set[ n % b ]
+<hr>
+      15   15 % 4    15/4     { 'A', 'B', 'C', 'D' }
+           =3        3        'D'
+</pre>
+<p>
+Continuing our example:
+</p>
+<pre>
+      n    n % b     n / b    Set[ n % b ]
+<hr>
+      4    3 % 3     4/3      { 'A', 'B', 'C' }
+           =0        1        'A'
+
+Remove 'A' from the bag:
+
+<hr>
+      1    1 % 2     1/2      { 'B', 'C' }
+           =1        0        'C'
+
+Remove 'C' from the bag.
+</pre>
+
+
+
+
+atoi_comb()
+
+
+
+
+
+Let's 
+</p>
+
+
+
+
+
+Say what?!
+</p>
+
+Let's say we want to calculate the 15th permutation:
+<p>
+<pre>
+   n=15
+
+first digit: n % 3 = 15 % 3 = 0, therefore 'A'
+   15 / 3 = 5
+second digit: n % 3 = 5 % 3 = 2, therefore 'C'
+   5 / 3 = 1
+third digit: n % 3 = 1 % 3 = 1, therefore 'B'
+</pre>
+<p>
+Let's walk through the 5th combination
+</p>
+
+<pre>
+first digit: n % 3 = 5 % 3 = 2, therefor 'C'
+   5 / 3 = 1;
+
+Now 'C' is 'used' so we can't re-use it.  This means our base changes from 3 down to 2 !
+
+second digit: n % 3 = 1 % 2 = 1, therefor 'B'.
+   1 / 2 = 0
+
+Now 'B' is also 'used' so  we can't reuse it either.  We again change our base from 2 down to 1.
+
+third digit: 0 % 1 = 1, therefore 'A' 
+</pre>
+
+<p>Lets write up the algorithm for combinations:
+</p>
+<pre>
+itoa_comb( int n, int base )
+{
+    /* */  char set[]  = "0123456789ABCDEF"; // not const for combination!
+    /* */  int  length = 0;
+    static char text[ 33 ]; // base 2 = max 32 binary digits + null
+
+    if (base <  2) base =  2;
+    if (base > 16) base = 16;
+
+    do
+    {
+        uint32_t quotient  = n / base;
+        uint32_t remainder = n % base;
+        text[ length++ ] = set[ remainder ];
+        n = quotient;
+
+        base--;
+        memcpy( set + remainder, set + remainder + 1, base - r );
+
+    } while( --length > 0 );
+
+</pre>
+
+
+<a id="Summary">
+<h2>Summary</h2>
+<p>Enough rambling! Clam up and show me the code already!</p>
+<p>Here is a "cheat sheet" for permutations and combinations:</p>
+
+<div class="ex">
+<table style="width:25%">
+    <tr>
+        <td><b>Permutation:</b> <span class="note">Constant</span> bit-rate</td>
+        <td><b>Combination:</b> <span class="note">Variable</span> bit-rate</td>
+    </tr>
+    <tr>
+        <td>Right to Left printing</td><td>Left to Right printing</td>
+    </tr>
+    <tr>
+        <td>
+      <div class="code"><span class="keyword">char</span><span class="op">*</span> itoa_perm<span class="paren">(</span> <span class="keyword">int</span> n, <span class="keyword">int</span> base <span class="paren">)</span>
+</div><div class="code"><span class="brace">{</span>
+</div><div class="code">    <span class="keyword">const</span>  <span class="keyword">char</span> set<span class="bracket">[]</span>  <span class="op">=</span> "<span class="char">0123456789ABCDEF</span>";
+</div><div class="code">    <span class="comment">/* */</span>  <span class="keyword">int</span>  length <span class="op">=</span> <span class="digit">0;
+</div><div class="code">
+</div><div class="code">    <span class="keyword">const  int </span>         MAX_DIGITS <span class="op">=</span> <span class="digit">32</span> ;
+</div><div class="code">    <span class="keyword">static char</span> output<span class="bracket">[</span> MAX_DIGITS <span class="op">+</span> <span class="digit">1</span> <span class="bracket">]</span>;
+</div><div class="code">
+</div><div class="code">    <span class="keyword">if</span> <span class="paren">(</span>base <span class="op"><</span> <span class="digit"> 2</span><span class="paren">)</span> base =  <span class="digit">2</span>;
+</div><div class="code">    <span class="keyword">if</span> <span class="paren">(</span>base <span class="op">></span> <span class="digit">16</span><span class="paren">)</span> base = <span class="digit">16</span>;
+</div><div class="code">
+</div><div class="code">    <span class="keyword">int</span>   r;
+</div><div class="code">    <span class="keyword">char</span> <span class="op">*</span>dst <span class="op">=</span> output <span class="op">+</span> MAX_DIGITS <span class="op">-</span> <span class="digit">1</span>;
+</div><div class="code">    <span class="op">*</span>dst<span class="op">-- =</span> <span class="digit">0</span>;
+</div><div class="code">
+</div><div class="code">    <span class="keyword">do</span>
+</div><div class="code">    <span class="brace">{</span>
+</div><div class="code">        r <span class="op">=</span> n <span class="op">%</span> base;
+</div><div class="code">        n <span class="op">=</span> n <span class="op">/</span> base;
+</div><div class="code">        <span class="op">*</span>dst<span class="op">-- =</span> set<span class="bracket">[</span> r <span class="bracket">]</span>;
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">    <span class="brace">}</span> <span class="keyword">while</span> <span class="paren">(</span>n <span class="op">></span> <span class="digit">0</span><span class="paren">)</span>;
+</div><div class="code">
+</div><div class="code">    <span class="keyword">return</span> dst<span class="op">+</span><span class="digit">1</span>;
+</div><div class="code"><span class="brace">}</span>
+</div>
+        </td><td>
+      <div class="code">char* itoa_comb( int n, int base )
+</div><div class="code">{
+</div><div class="code">    /* */  char set[]  =  "0123456789ABCDEF";
+</div><div class="code">    /* */  int  length = 0;
+</div><div class="code">
+</div><div class="code">    const  int  MAX_DIGITS = 32;
+</div><div class="code">    static char text[ MAX_DIGITS + 1 ];
+</div><div class="code">
+</div><div class="code">    if (base <  2) base =  2;
+</div><div class="code">    if (base > 16) base = 16;
+</div><div class="code">
+</div><div class="code">    int r;
+</div><div class="code">    char *dst = output + MAX_DIGITS - 1;
+</div><div class="code">    *dst-- = 0;
+</div><div class="code">
+</div><div class="code">    do
+</div><div class="code">    {
+</div><div class="code">        r = n % base;
+</div><div class="code">        n = n / base;
+</div><div class="code">        *dst-- = set[ r ];
+</div><div class="code">
+</div><div class="code">        <span class="comment">// Remove 'r'th element</span>
+</div><div class="code">        <span class="eg">base--; // Combination = decreasing base</span>
+</div><div class="code">        <span class="eg">int digits = base - r;</span>
+</div><div class="code">        <span class="eg">if( digits > 0 )</span>
+</div><div class="code">        <span class="eg">    memcpy( set + r, set + r + 1, digits );</span>
+</div><div class="code">
+</div><div class="code">    } while (n > 0);
+</div><div class="code">
+</div><div class="code">    return dst+1;
+</div><div class="code">}
+</div>
+        </td>
+    </tr>
+    <tr><td>
+      <div class="code"><span class="keyword">int</span> atoi_perm( <span class="keyword">const char</span> <span class="op">*</span>input, <span class="keyword">const int</span> base, <span class="keyword">const char</span> set<span class="bracket">[]</span> <span class="op">=</span> "<span class="char">0123456789ABCDEF</span>" <span class="paren">)</span>
+</div><div class="code"><span class="brace">{</span>
+</div><div class="code">    <span class="keyword">const char</span> <span class="op">*</span>text   <span class="op">=</span> input;
+</div><div class="code">    <span class="comment">/* */</span> <span class="keyword">int</span>   digits <span class="op">=</span> strlen<span class="paren">(</span> input <span class="paren">)</span>;
+</div><div class="code">    <span class="comment">/* */</span> <span class="keyword">int</span>   n      <span class="op">=</span> 0, r;
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">    <span class="keyword">for</span><span class="paren">(</span> int length <span class="op">=</span> <span class="digit">0</span>; length <span class="op"><</span> digits; length<span class="op">++</span> <span class="paren">)</span>
+</div><div class="code">    <span class="brace">{</span>
+</div><div class="code">        r = find( base, set, *text++ );
+</div><div class="code">        <span class="keyword">if</span><span class="paren">(</span> r <span class="op"><</span> <span class="digit">0</span> <span class="paren">)</span>
+</div><div class="code">            <span class="keyword">return</span> n;
+</div><div class="code">
+</div><div class="code">        n <span class="op">*=</span> base;
+</div><div class="code">        n <span class="op">+=</span> r;
+</div><div class="code">
+</div><div class="code">
+</div><div class="code">    <span class="brace">}</span>
+</div><div class="code">
+</div><div class="code">    <span class="keyword">return</span> n;
+</div><div class="code"><span class="brace">}</span>
+</div>
+</td><td>
+      <div class="code">int atoi_comb( const char *input, const int BASE, const char SET[] = "0123456789ABCDEF" )
+</div><div class="code">{
+</div><div class="code">    const char *text   = input;
+</div><div class="code">    /* */ int   digits = strlen( input );
+</div><div class="code">    /* */ int   n      = 0, r;
+</div><div class="code">    <span class="eg">/* */ int   b      = 1, base = BASE;</span> <span class="comment">// default to base</span>
+</div><div class="code">
+</div><div class="code">    static char set[] = "0123456789ABCDEF";
+</div><div class="code">    memcpy( set, SET, base );
+</div><div class="code">
+</div><div class="code">    for( int length = 0; length < digits; length++ )
+</div><div class="code">    {
+</div><div class="code">        r = find( base, set, *text++ );
+</div><div class="code">        if( r < 0 )
+</div><div class="code">            return n;
+</div><div class="code">
+</div><div class="code">        n += (r * b);
+</div><div class="code">        b *= base;
+</div><div class="code">        <span class="eg">--base;</span>
+</div><div class="code">        <span class="eg">memcpy( set + r, set + r + 1, base - r );</span> <span class="comment">// Remove set[r] element</span>
+</div><div class="code">    }
+</div><div class="code">
+</div><div class="code">    return n;
+</div><div class="code">}
+</div>
+</td></tr>
+</table>
+</div>
+
+<a id="References">
+<h2>References</h2>
+<ul>
+<li> http://math.stackexchange.com/questions/349924/function-mapping-combinations-to-natural-numbers
+<li> http://en.wikipedia.org/wiki/Combinatorial_number_system
+<li> https://en.wikipedia.org/wiki/Factorial_number_system
+<li> http://www.mathsisfun.com/combinatorics/combinations-permutations.html
+</ul>
+    </body>
+</html>
