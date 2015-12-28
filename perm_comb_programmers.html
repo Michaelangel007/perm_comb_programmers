@@ -1190,7 +1190,7 @@ itoa_comb( int n, int base )
 </div><div class="code">    <span class="keyword">if</span> <span class="paren">(</span>base <span class="op">></span> <span class="digit">16</span><span class="paren">)</span> base = <span class="digit">16</span>;
 </div><div class="code">
 </div><div class="code">    <span class="keyword">int</span>   r;
-</div><div class="code">    <span class="keyword">char</span> <span class="op">*</span>dst <span class="op">=</span> output <span class="op">+</span> MAX_DIGITS <span class="op">-</span> <span class="digit">1</span>;
+</div><div class="code">    <span class="keyword">char</span> <span class="op">*</span>dst <span class="op">=</span> output <span class="op">+</span> MAX_DIGITS;
 </div><div class="code">    <span class="op">*</span>dst<span class="op">-- =</span> <span class="digit">0</span>;
 </div><div class="code">
 </div><div class="code">    <span class="keyword">do</span>
@@ -1216,14 +1216,14 @@ itoa_comb( int n, int base )
 </div><div class="code">    /* */  char set[]  =  "0123456789ABCDEF";
 </div><div class="code">    /* */  int  length = 0;
 </div><div class="code">
-</div><div class="code">    const  int  MAX_DIGITS = 32;
+</div><div class="code">    const  int        MAX_DIGITS = 32;
 </div><div class="code">    static char text[ MAX_DIGITS + 1 ];
 </div><div class="code">
 </div><div class="code">    if (base <  2) base =  2;
 </div><div class="code">    if (base > 16) base = 16;
 </div><div class="code">
 </div><div class="code">    int r;
-</div><div class="code">    char *dst = output + MAX_DIGITS - 1;
+</div><div class="code">    char *dst = output + MAX_DIGITS;
 </div><div class="code">    *dst-- = 0;
 </div><div class="code">
 </div><div class="code">    do
