@@ -645,10 +645,10 @@ Pseudo-code:
    output := ""
    for each digit in n
    begin
-      r := n % base;
-      n := n / base;
-      e := set[ r ];
-      output := e + output; // prepend: right to left
+      remainder := number % base;
+      number    := number / base;
+      element   := set[ remainder ];
+      output    := element + output; // prepend: right to left
    end
 </pre>
 </div>
@@ -659,13 +659,13 @@ Working through our P#<span class="i">50</span> example in base 4.
       n    r = n % b   n / b   Set[ r ]   Output
 <hr>
       50   50 % 4      50/4     
-           =2          12     '<span class="char">C</span>'         C
+           =2          12      '<span class="char">C</span>'        C
 <hr>
       12   12 % 4      12/4     
-           =0          3      '<span class="char">A</span>'         AC
+           =0          3       '<span class="char">A</span>'        AC
 <hr>
       3    3 % 4       3/4      
-           =3                 '<span class="char">D</span>'         DAC
+           =3                  '<span class="char">D</span>'        DAC
 <hr>
 </pre>
 
@@ -927,7 +927,10 @@ This begs the question:
 <li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number C#<span class="i">15</span></li>
 </ul>
 <p>Hold-up!  Didn't I make a typo? DAC is C#<span class="i">19</span>, not C#<span class="i">15</span>!
- There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen. For example we could have this "forward mapping":
+ There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen.
+</p>
+
+<p>For example we could have this "forward mapping" (See example: <span class="code">comb_natural.cpp</span>):
 </p>
 <div class="defn">
 <pre>
@@ -939,7 +942,7 @@ This begs the question:
 #<span class="i">20 </span>ADC    #<span class="i">21 </span>BDC    #<span class="i">22 </span class="i">CDB    #<span class="i">23 </span>DCB
 </pre>
 </div>
-<p>Or this mapping:</p>
+<p>Or this mapping: (See example: <span class="code">comb_fastswap.cpp</span>)</p>
 <div class="defn">
 <pre>
 #<span class="digit"> 0 </span>ADC    #<span class="digit"> 1 </span class="digit">BAC    #<span class="digit"> 2 </span>CAD    #<span class="digit"> 3 </span>DAC
@@ -951,7 +954,7 @@ This begs the question:
 </pre>
 </div>
 <p>
-Does it matter <i>which</i> enumaration ordering we use??<br>
+Q. Does it matter <i>which</i> enumaration ordering we use??<br>
 For example, Alice might map:
 </p>
 <div class="ex">
@@ -987,11 +990,11 @@ And Charles might chose (Alice's scheme +1):
 </div>
 
 <p>
-No, the number we assign to each combination entry doesn't matter <b>as long as we enumerate ALL combinations.</b>
+A. No, the number we assign to each combination entry doesn't matter <b>as long as we enumerate ALL combinations.</b>
  This is why it is important to use the <i>same mapping for the forward and inverse.</i>
 </p>
 </pre>
-<p><b>Meta-Exercise</b>: How many different ways could we enumerate the set of ABC assigning an unique number to each combination?
+<p><b>Meta-Exercise</b>: How many different ways could we enumerate the combinations of ABCD picking 3 letters assigning each arrangement a different and unique number?
 </p>
 <p>
 Getting back to where we left off .. how do we calculate what the unique enumeration
@@ -1066,16 +1069,16 @@ Let's call the set passed into itoa() our <b>master set</b>,
 <pre>
 char* itoa_comb( uint32_t n, int base, int length, const char masterSet[] = "0123456789ABCDEF" )
 {
-    const  int  MAX_DIGITS = 32;
-    static char output[ MAX_DIGITS + 1 ];
+    <b>const  int</b>          MAX_DIGITS = 32;
+    <b>static char</b> output[ MAX_DIGITS + 1 ];
 
-    static char set[ MAX_DIGITS ];
+    <b>static char</b> set[ MAX_DIGITS ];
     memcpy( set, masterSet, base );
 
     int r;
-    char *dst = output; // print left to right!
+    <b>char</b> *dst = output; // print left to right!
 
-    do
+    <b>do</b>
     {
         r = n % base;
         n = n / base;
@@ -1086,7 +1089,7 @@ char* itoa_comb( uint32_t n, int base, int length, const char masterSet[] = "012
     } <b>while</b> (--length > <span>0</span>);
 
     *dst = 0;
-    return output;
+    <b>return</b> output;
 }
 </pre>
 <p>
@@ -1169,24 +1172,29 @@ third digit: 0 % 1 = 1, therefore 'A'
 <pre>
 itoa_comb( int n, int base )
 {
-    /* */  char set[]  = "0123456789ABCDEF"; // not const for combination!
-    /* */  int  length = 0;
-    static char text[ 33 ]; // base 2 = max 32 binary digits + null
+    const  char mainset[] = "0123456789ABCDEF";
+    /* */  char workset[] = 0; // not const for combination!
+    /* */  int  length    = 0;
+
+    const  int          LEN = 32;
+    static char output[ LEN + 1 ]; // base 2 = max 32 binary digits + null
 
     if (base <  2) base =  2;
     if (base > 16) base = 16;
+
+    memcpy( workSet, mainSet, sizeof( mainSet ) );
 
     do
     {
         uint32_t quotient  = n / base;
         uint32_t remainder = n % base;
-        text[ length++ ] = set[ remainder ];
+        text[ length++ ] = workset[ remainder ];
         n = quotient;
 
         base--;
-        memcpy( set + remainder, set + remainder + 1, base - r );
+        memcpy( workset + remainder, workset + remainder + 1, base - r );
 
-    } while( --length > 0 );
+    } while( base > 1 );
 
 </pre>
 
