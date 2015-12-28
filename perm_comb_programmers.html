@@ -400,7 +400,7 @@ Now it should be pretty obvious that any random plain integer is a permutation!<
 <span class="eg">
  <br>
  Key insight: </span>
- The number of elements in the set, <span><i>b</i></span>, is the number base!
+ The number of elements in the set, <span class="i"><i>b</i></span>, is the number base!
  <br>
  <br>
 </div>
@@ -518,7 +518,7 @@ The order is akin to your standard <a href="http://anthony.liekens.net/images/cl
 </pre>
 
 <p>
-Q. <b>How</b> can we calculate <i>how to</i> <i>map</i> #<span>50</span> directly to "DAC" <b>without</b> a table lookup?
+Q. <b>How</b> can we calculate <i>how to</i> <i>map</i> #<span class="i">50</span> directly to "DAC" <b>without</b> a table lookup?
 </p>
 <p>
 This example <b>is in base 4</b> but let's write out the permutation unique number in binary to make it easier to compute.
@@ -528,38 +528,39 @@ First, enumerate our set elements:
 </p>
 <div class="ex"><pre><table>
     <tr border=1><td>Decimal </td><td>Binary </td><td>Element </td></tr>
-    <tr><td>#<span class="i">0<span></td><td>00<sub>2</sub></td><td><span class="char">A</span></td></tr>
-    <tr><td>#<span class="i">1<span></td><td>01<sub>2</sub></td><td><span class="char">B</span></td></tr>
-    <tr><td>#<span class="i">2<span></td><td>10<sub>2</sub></td><td><span class="char">C</span></td></tr>
-    <tr><td>#<span class="i">3<span></td><td>11<sub>2</sub></td><td><span class="char">D</span></td></tr>
+    <tr><td>#<span class="i">0</span></td><td>00<sub>2</sub></td><td><span class="char">A</span></td></tr>
+    <tr><td>#<span class="i">1</span></td><td>01<sub>2</sub></td><td><span class="char">B</span></td></tr>
+    <tr><td>#<span class="i">2</span></td><td>10<sub>2</sub></td><td><span class="char">C</span></td></tr>
+    <tr><td>#<span class="i">3</span></td><td>11<sub>2</sub></td><td><span class="char">D</span></td></tr>
 </table></pre></div>
 <p>
-Second, convert #<span>50</span> in base 10, designated 50<sub>10</sub>, to base 2 which is 110010<sub>2</sub>.
+Second, convert #<span class="i">50</span> in base 10, designated 50<sub>10</sub>, to base 2 which is 110010<sub>2</sub>.
 </p>
 <p>
 Third, inspecting our permutation number in binary makes it trivial to see which set elements are in which position.
- Since each element takes 2 bits, we can grouping the binary number into groups of 2 bits, and inserting spaces: 110010<sub>2</sub> -> 11 00 10<sub>2</sub> then:
+ Since each element takes 2 bits we can grouping the binary number into groups of 2 bits (and inserting spaces for readability): 110010<sub>2</sub> -> 11 00 10<sub>2</sub> then:
 </p>
 <pre>
- #<span>50</span><sub>10</sub> = 11<sub>2</sub> 00<sub>2</sub> 10<sub>2</sub>
+ #<span class="i">50</span><sub>10</sub> = 11<sub>2</sub> 00<sub>2</sub> 10<sub>2</sub>
           3   0   2
           <span class="char">D   A   C</span>
 </pre>
-
+<p>OK, that wasn't too hard.
+</p>
 <hr>
 
 <a id="PermPrint">
 <h3>itoa() aka printf()</h3>
 </a>
 <p>
-If want to converted the permutation #<span>50</span> to the printable string "<span class="char">DAC</span>" how would we do that?
+If want to converted the permutation #<span class="i">50</span> to the printable string "<span class="char">DAC</span>" how would we do that?
 </p>
 <p>
 Before we answer that we need to digress slightly. Two very handy math operators are:
 </p>
 <pre>
-    '/' integer division            aka <b>Linear Division</b>
-    '%' integer modulas (or modulo) aka <b>Cyclic Division</b>
+    '/' integer division            aka <span class="i"><b>Linear Division</b></span>
+    '%' integer modulas (or modulo) aka <span class="i"><b>Cyclic Division</b></span>
 </pre>
 <p>
 Recall from school that integer division leaves a quotient and a remainder (which could be zero.)
@@ -569,7 +570,7 @@ Recall from school that integer division leaves a quotient and a remainder (whic
     -------- = Quotient, along with an (optional) Remainder
     Divisor
 </pre>
-<p>If you are not familiar with the <b>modulas operator</b> but <i>do</i> know how to tell time I'll <b>prove it to you</b>
+<p>If you are not familiar with the <b>modulas operator</b> but <i>do</i> know how to tell <i>analogue</i> time I'll <b>prove it to you</b>
  that you are <i>already</i> familiar with modulas arithmetic using two different bases!
 </p>
 </p>
@@ -579,7 +580,7 @@ Recall from school that integer division leaves a quotient and a remainder (whic
 </pre>
 <p>
 Let's focus on the minutes for simplicity. When it is 10:59 and 5 minutes go by the time
- isn't 10:64 but 11:04 since minutes are always in the range <span>0</span> .. <span>59</span>.
+ isn't 10:64 but 11:04 since minutes are always in the range <span class="digit">0</span> .. <span class="digit">59</span>.
 </p>
 <pre>
     minutes  = (59 + 5) mod 60
@@ -594,7 +595,7 @@ Likewise for hours: When it is 11:00, and 2 hours go by, the time isn't 11:00 + 
  -- they can use the equivalent example 2300 + 0200 = 2500 = 0100 instead.)
 </p>
 <p>
-Every time we go over 12, we subtract 12.  Ergo our hour time is aways in the range: <span>0</span> .. <span>11</span>.</p>
+Every time we go over 12, we subtract 12.  Ergo our hour time is aways in the range: <span class="digit">0</span> .. <span class="digit">11</span>.</p>
 <p>Wait! There isn't a 0:00 time in normal usage! Well, actully there <i>is</i> <b>but</b> we just <b>display</b> it
  as 12 because <i>conceptually</i> 0 and 12 are <b>equivalent mod 12</b>.
  (Again, military time uses 0000 to represent midnight.)
@@ -612,6 +613,7 @@ Every time we go over 12, we subtract 12.  Ergo our hour time is aways in the ra
 <div class="eg">Example 4:</div>
 <pre>
    rem = 13 % 12;                    13 &equiv; 1 (mod 12)
+       = 1
 </pre>
 <p>
 There are other times when it is handy to directly calculate the <a href="http://en.wikipedia.org/wiki/Modulo_operation">remainder</a>.  This is one of those times. :-)
@@ -620,10 +622,10 @@ There are other times when it is handy to directly calculate the <a href="http:/
 Examining the definition of permutations we notice a repeated pattern:
 </p>
 <pre>
- ... + <span>r</span><sub>#</sub>*b<span class="exp"><sup>#</sup></span> + ...
+ ... + <span class="i">r</span><sub>#</sub>*b<span class="exp"><sup>#</sup></span> + ...
 </pre>
 <p>
-If we take the number <b>n mod b</b>, or <b>n % b</b>, we can "peel" off one digit at a time to get <span>r</span><sub>i</sub>.
+If we take the number <b>n mod b</b>, or <b>n % b</b>, we can "peel" off one digit at a time to get <span class="i">r</span><sub>i</sub>.
  That is <b>r = n mod b</b> returns a number, r, in the range:
 </p>
 <pre>
@@ -651,19 +653,19 @@ Pseudo-code:
 </pre>
 </div>
 <p>
-Working through our #<span>50</span> example in base 4.
+Working through our P#<span class="i">50</span> example in base 4.
 </p>
 <pre>
-      n    r = n % b   n / b      Set[ r ]
+      n    r = n % b   n / b   Set[ r ]   Output
 <hr>
       50   50 % 4      50/4     
-           =2          12         '<span class="char">C</span>'
+           =2          12     '<span class="char">C</span>'         C
 <hr>
       12   12 % 4      12/4     
-           =0          3          '<span class="char">A</span>'
+           =0          3      '<span class="char">A</span>'         AC
 <hr>
       3    3 % 4       3/4      
-           =3                     '<span class="char">D</span>'
+           =3                 '<span class="char">D</span>'         DAC
 <hr>
 </pre>
 
@@ -853,27 +855,54 @@ Next, cross off entries that have duplicates elements:
 <div class="eg">Combinations of A, B, C, and D with permutations crossed off:</div>
 <div class="defn">
 <pre>
-<del>#<span> - </span>AAA</del>    <del>#<span>16 </span>BAA</del>    <del>#<span> - </span>CAA</del>    <del>#<span> - </span>DAA</del>
-<del>#<span> - </span>AAB</del>    <del>#<span>17 </span>BAB</del>    #<span>12 </span>CAB    #<span>18 </span>DAB
-<del>#<span> - </span>AAC</del>    #<span> 6 </span>BAC    <del>#<span> - </span>CAC</del>    #<span>19 </span>DAC
-<del>#<span> - </span>AAD</del>    #<span> 7 </span>BAD    #<span>13 </span>CAD    <del>#<span> - </span>DAD</del>
+ <del>#<span class="i"> ? </span>AAA</del>    <del>#<span class="i"> ? </span>BAA</del>    <del>#<span class="i"> ? </span>CAA</del>    <del>#<span class="i"> ? </span>DAA</del>
+ <del>#<span class="i"> ? </span>AAB</del>    <del>#<span class="i"> ? </span>BAB</del>   &nbsp;#<span class="i"> ? </span>CAB&#0160;  &nbsp;#<span class="i"> ? </span>DAB&#0160;
+ <del>#<span class="i"> ? </span>AAC</del>   &nbsp;#<span class="i"> ? </span>BAC&#0160;   <del>#<span class="i"> ? </span>CAC</del>   &nbsp;#<span class="i"> ? </span>DAC&#0160;
+ <del>#<span class="i"> ? </span>AAD</del>   &nbsp;#<span class="i"> ? </span>BAD&#0160;  &nbsp;#<span class="i"> ? </span>CAD&#0160;   <del>#<span class="i"> ? </span>DAD</del>
 
-<del>#<span> - </span>ABA</del>    <del>#<span> - </span>BBA</del>    #<span>14 </span>CBA    #<span>20 </span>DBA
-<del>#<span> - </span>ABB</del>    <del>#<span> - </span>BBB</del>    <del>#<span> - </span>CBB</del>    <del>#<span>20 </span>DBB</del>
-#<span> 0 </span>ABC    <del>#<span> - </span>BBC</del>    <del>#<span> - </span>CBC</del>    #<span>21 </span>DBC
-#<span> 1 </span>ABD    <del>#<span> - </span>BBD</del>    #<span>15 </span>CBD    <del>#<span>55 </span>DBD</del>
+ <del>#<span class="i"> ? </span>ABA</del>    <del>#<span class="i"> ? </span>BBA</del>   &nbsp;#<span class="i"> ? </span>CBA&#0160;  &nbsp;#<span class="i"> ? </span>DBA&#0160;
+ <del>#<span class="i"> ? </span>ABB</del>    <del>#<span class="i"> ? </span>BBB</del>    <del>#<span class="i"> ? </span>CBB</del>    <del>#<span class="i"> ? </span>DBB</del>
+&nbsp;#<span class="i"> ? </span>ABC&#0160;   <del>#<span class="i"> ? </span>BBC</del>    <del>#<span class="i"> ? </span>CBC</del>   &nbsp;#<span class="i"> ? </span>DBC&#0160;
+&nbsp;#<span class="i"> ? </span>ABD&#0160;   <del>#<span class="i"> ? </span>BBD</del>   &nbsp;#<span class="i"> ? </span>CBD&#0160;   <del>#<span class="i"> ? </span>DBD</del>
 
-<del>#<span> - </span>ACA</del>    #<span> 8 </span>BCA    <del>#<span> - </span>CCA</del>    #<span>22 </span>DCA
-#<span> 2 </span>ACB    <del>#<span> - </span>BCB</del>    <del>#<span> - </span>CCB</del>    #<span>23 </span>DCB
-<del>#<span> - </span>ACC</del>    <del>#<span> - </span>BCC</del>    <del>#<span> - </span>CCC</del>    <del>#<span> - </span>DCC</del>
-#<span> 3 </span>ACD    #<span> 9 </span>BCD    <del>#<span> - </span>CCD</del>    <del>#<span> - </span>DCD</del>
+ <del>#<span class="i"> ? </span>ACA</del>   &nbsp;#<span class="i"> ? </span>BCA&#0160;   <del>#<span class="i"> ? </span>CCA</del>   &nbsp;#<span class="i"> ? </span>DCA&#0160;
+&nbsp;#<span class="i"> ? </span>ACB&#0160;   <del>#<span class="i"> ? </span>BCB</del>    <del>#<span class="i"> ? </span>CCB</del>   &nbsp;#<span class="i"> ? </span>DCB&#0160;
+ <del>#<span class="i"> ? </span>ACC</del>    <del>#<span class="i"> ? </span>BCC</del>    <del>#<span class="i"> ? </span>CCC</del>    <del>#<span class="i"> ? </span>DCC</del>
+&nbsp;#<span class="i"> ? </span>ACD&#0160;  &nbsp;#<span class="i"> ? </span>BCD&#0160;   <del>#<span class="i"> ? </span>CCD</del>    <del>#<span class="i"> ? </span>DCD</del>
 
-<del>#<span> - </span>ADA</del>    #<span>10 </span>BDA    #<span>16 </span>CDA    <del>#<span> - </span>DAA</del>
-#<span> 4 </span>ADB    <del>#<span>-- </span>BDB</del>    #<span>17 </span>CDB    <del>#<span> - </span>DAB</del>
-#<span> 5 </span>ADC    #<span>11 </span>BDC    <del>#<span> - </span>CDC</del>    <del>#<span> - </span>DAC</del>
-<del>#<span> - </span>ADD</del>    <del>#<span>-- </span>BDD</del>    <del>#<span> - </span>CDD</del>    <del>#<span> - </span>DAD</del>
+ <del>#<span class="i"> ? </span>ADA</del>   &nbsp;#<span class="i"> ? </span>BDA&#0160;  &nbsp;#<span class="i"> ? </span>CDA&#0160;   <del>#<span class="i"> ? </span>DAA</del>
+&nbsp;#<span class="i"> ? </span>ADB&#0160;   <del>#<span class="i"> ? </span>BDB</del>   &nbsp;#<span class="i"> ? </span>CDB&#0160;   <del>#<span class="i"> ? </span>DAB</del>
+&nbsp;#<span class="i"> ? </span>ADC&#0160;  &nbsp;#<span class="i"> ? </span>BDC&#0160;   <del>#<span class="i"> ? </span>CDC</del>    <del>#<span class="i"> ? </span>DAC</del>
+ <del>#<span class="i"> ? </span>ADD</del>    <del>#<span class="i"> ? </span>BDD</del>    <del>#<span class="i"> ? </span>CDD</del>    <del>#<span class="i"> ? </span>DAD</del>
 </pre>
 </div>
+<p>Then let's re-number the enumerations:
+</p>
+<div class="eg">Enumeration of Combinations of A, B, C, and D with permutations crossed off:</div>
+<div class="defn">
+<pre>
+ <del>#<span class="i"> - </span>AAA</del>    <del>#<span class="i"> - </span>BAA</del>    <del>#<span class="i"> - </span>CAA</del>    <del>#<span class="i"> - </span>DAA</del>
+ <del>#<span class="i"> - </span>AAB</del>    <del>#<span class="i"> - </span>BAB</del>   &nbsp;#<span class="i">12 </span>CAB&#0160;  &nbsp;#<span class="i">18 </span>DAB&#0160;
+ <del>#<span class="i"> - </span>AAC</del>   &nbsp;#<span class="i"> 6 </span>BAC&#0160;   <del>#<span class="i"> - </span>CAC</del>   &nbsp;#<span class="i">19 </span>DAC&#0160;
+ <del>#<span class="i"> - </span>AAD</del>   &nbsp;#<span class="i"> 7 </span>BAD&#0160;  &nbsp;#<span class="i">13 </span>CAD&#0160;   <del>#<span class="i"> - </span>DAD</del>
+
+ <del>#<span class="i"> - </span>ABA</del>    <del>#<span class="i"> - </span>BBA</del>   &nbsp;#<span class="i">14 </span>CBA&#0160;  &nbsp;#<span class="i">20 </span>DBA&#0160;
+ <del>#<span class="i"> - </span>ABB</del>    <del>#<span class="i"> - </span>BBB</del>    <del>#<span class="i"> - </span>CBB</del>    <del>#<span class="i"> - </span>DBB</del>
+&nbsp;#<span class="i"> 0 </span>ABC&#0160;   <del>#<span class="i"> - </span>BBC</del>    <del>#<span class="i"> - </span>CBC</del>   &nbsp;#<span class="i">21 </span>DBC&#0160;
+&nbsp;#<span class="i"> 1 </span>ABD&#0160;   <del>#<span class="i"> - </span>BBD</del>   &nbsp;#<span class="i">15 </span>CBD&#0160;   <del>#<span class="i"> - </span>DBD</del>
+
+ <del>#<span class="i"> - </span>ACA</del>   &nbsp;#<span class="i"> 8 </span>BCA&#0160;   <del>#<span class="i"> - </span>CCA</del>   &nbsp;#<span class="i">22 </span>DCA&#0160;
+&nbsp;#<span class="i"> 2 </span>ACB&#0160;   <del>#<span class="i"> - </span>BCB</del>    <del>#<span class="i"> - </span>CCB</del>   &nbsp;#<span class="i">23 </span>DCB&#0160;
+ <del>#<span class="i"> - </span>ACC</del>    <del>#<span class="i"> - </span>BCC</del>    <del>#<span class="i"> - </span>CCC</del>    <del>#<span class="i"> - </span>DCC</del>
+&nbsp;#<span class="i"> 3 </span>ACD&#0160;  &nbsp;#<span class="i"> 9 </span>BCD&#0160;   <del>#<span class="i"> - </span>CCD</del>    <del>#<span class="i"> - </span>DCD</del>
+
+ <del>#<span class="i"> - </span>ADA</del>   &nbsp;#<span class="i">10 </span>BDA&#0160;  &nbsp;#<span class="i">16 </span>CDA&#0160;   <del>#<span class="i"> - </span>DAA</del>
+&nbsp;#<span class="i"> 4 </span>ADB&#0160;   <del>#<span class="i">-- </span>BDB</del>   &nbsp;#<span class="i">17 </span>CDB&#0160;   <del>#<span class="i"> - </span>DAB</del>
+&nbsp;#<span class="i"> 5 </span>ADC&#0160;  &nbsp;#<span class="i">11 </span>BDC&#0160;   <del>#<span class="i"> - </span>CDC</del>    <del>#<span class="i"> - </span>DAC</del>
+ <del>#<span class="i"> - </span>ADD</del>    <del>#<span class="i">-- </span>BDD</del>    <del>#<span class="i"> - </span>CDD</del>    <del>#<span class="i"> - </span>DAD</del>
+</pre>
+</div>
+
 
 <p>Lastly, cleaning it up we are left with:</p>
 </p>
@@ -894,10 +923,10 @@ Next, cross off entries that have duplicates elements:
 This begs the question:
 </p>
 <ul>
-<li>How do we calculate the <b>forward</b> transform? i.e. Given #<span>15</span> calculate "DAC" ?</li>
-<li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number #<span>15</span></li>
+<li>How do we calculate the <b>forward</b> transform? i.e. Given C#<span class="i">15</span> calculate "DAC" ?</li>
+<li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number C#<span class="i">15</span></li>
 </ul>
-<p>Hold-up!  Didn't I make a typo? DAC is #<span>19</span>, not #<span>15</span>!
+<p>Hold-up!  Didn't I make a typo? DAC is C#<span class="i">19</span>, not C#<span class="i">15</span>!
  There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen. For example we could have this "forward mapping":
 </p>
 <div class="defn">
