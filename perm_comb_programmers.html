@@ -1258,7 +1258,7 @@ itoa_comb( int n, int base )
 </div><div class="code">
 </div><div class="code">    <span class="keyword">for</span><span class="paren">(</span> int length <span class="op">=</span> <span class="digit">0</span>; length <span class="op"><</span> digits; length<span class="op">++</span> <span class="paren">)</span>
 </div><div class="code">    <span class="brace">{</span>
-</div><div class="code">        r = find( base, set, *text++ );
+</div><div class="code">        r <span class="op">=</span> find<span class="paren">(</span> base, set, <span class="op">*</span>text<span class="op">++</span> <span class="paren">)</span>;
 </div><div class="code">        <span class="keyword">if</span><span class="paren">(</span> r <span class="op"><</span> <span class="digit">0</span> <span class="paren">)</span>
 </div><div class="code">            <span class="keyword">return</span> n;
 </div><div class="code">
