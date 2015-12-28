@@ -1,0 +1,14 @@
+What's the difference between the different combination mappings?
+
+ - natural
+ - fast swap
+ - shift
+
+Example:
+
+Given set ABCD, and C#15
+
+n   r = n % base  FastSwap  Natural   Shift
+15    = 15 % 4    ABCD      ABCD      ABCD
+      = 3           
+
