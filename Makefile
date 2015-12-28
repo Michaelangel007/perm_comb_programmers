@@ -20,8 +20,8 @@ demo_comb_fastswap: comb_fastswap.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 demo_comb_natural: comb_natural.cpp
-	$(CC)  $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 demo_comb_shift: comb_shift.cpp
-	$(CC)  $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
