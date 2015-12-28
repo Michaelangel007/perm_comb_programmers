@@ -9,16 +9,16 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 // Combinations
 
-    char* itoa_comb_fast( unsigned int n, int base, int length, const char MASTER_SET[] = "0123456789ABCDEF" )
+    char* itoa_comb_shift( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
-        static char output[ MAX_DIGITS + 1 ]; // base=2 output in binary is 32 digits
+        static char output[ MAX_DIGITS + 1 ];
 
         if (base <  2) base =  2;
         if (base > 16) base = 16;
 
         static char set[ 16 ]; // variable length array: set[ base ]
-        memcpy( set, MASTER_SET, base ); // Optimization: strlen( MASTER_SET ) == base
+        memcpy( set, SET, base ); // Optimization: strlen( SET )= base
 
         int   r; // remainder
         char *dst = output;
@@ -27,10 +27,10 @@ https://github.com/Michaelangel007/perm_comb_programmers
         {
             r = n % base;
             n = n / base;
-            *dst++ = set[ r      ];
-            set[r] = set[ --base ]; 
-            // Optimization: instead of shifting workset over by one character
-            // We move the last element into the slot that was just used
+            *dst++ = set[ r ];
+
+            --base;
+            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
         } while (--length > 0);
 
         *dst = 0;
@@ -39,7 +39,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 // Demo
     /*
-        Map unique id to combination with fast swap
+        Map unique id to combination with natural
 
             Dec  Bin  Elem
             #0   00   A
@@ -48,45 +48,45 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# set[r]
-            # 0 ADC
+            Id# shift
+            # 0 ABC
             # 1 BAC
-            # 2 CAD
-            # 3 DAC
-            # 4 ABD
-            # 5 BDA
+            # 2 CAB
+            # 3 DAB
+            # 4 ACB
+            # 5 BCA
             # 6 CBA
             # 7 DBA
-            # 8 ACD
-            # 9 BCA
+            # 8 ADB
+            # 9 BDA
             #10 CDA
             #11 DCA
-            #12 ADB
+            #12 ABD
             #13 BAD
-            #14 CAB
-            #15 DAB
-            #16 ABC
-            #17 BDC
+            #14 CAD
+            #15 DAC
+            #16 ACD
+            #17 BCD
             #18 CBD
             #19 DBC
-            #20 ACB
-            #21 BCD
+            #20 ADC
+            #21 BDC
             #22 CDB
             #23 DCB
     */
-    void demo_comb_fastswap()
+    void demo_comb_shift()
     {
         char *output;
         int  base   = 4;
         int  digits = 3;
         char set[]  = "ABCD";
 
-        printf( "= Combinations (Fast Swap) =\n" );
-        printf( "Id# set[r]\n" );
+        printf( "= Combinations (Shift) =\n" );
+        printf( "Id# shift\n" );
 
         for( int i = 0; i < 24; i++ )
         {
-            output = itoa_comb_fast( i, base, digits, set );
+            output = itoa_comb_shift( i, base, digits, set );
             printf( "#%2d %s\n", i, output );
         }
 
@@ -95,7 +95,8 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 int main()
 {
-    demo_comb_fastswap();
+    demo_comb_shift();
 
     return 0;
 }
+
