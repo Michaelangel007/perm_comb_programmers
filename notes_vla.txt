@@ -1,0 +1,15 @@
+
+        // "The nice thing about standards is that you have so many to choose from." -- Andrew Tanenbaum
+        // Note: Variable Lengths Arrays ARE supported by C99 but confusingly
+        //       are NOT part of the C++11 Standard (§ 8.3.4/1) nor are they in C14.
+        // See the document: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3820.html
+        // If you have a broken compiler *without* C99 support you'll need to use alloca().
+        // If you have a functioning compiler *with* C99 support it is safer to use:
+        //     char set[ base ];
+
+#if 1
+        char *set = (char*) alloca( base ); // variable length array: set[ base ]
+#else
+        char set[ base ]; // variable length array
+#endif
+
