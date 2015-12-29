@@ -63,13 +63,14 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         printf( "\n" );
     }
 
-/* Mapping unique id to combination
+/*
+    Mapping unique id to permutation (without repetition)
 
-      Dec  Bin  Elem
-       #0   00   A
-       #1   01   B
-       #2   10   C
-       #3   11   D
+        Dec  Bin  Element
+        #0   00   A
+        #1   01   B
+        #2   10   C
+        #3   11   D
 
     Id    memcpy()   set[r] Different   Natural
     # 0   ABC        ADC    *20         ABC 0 0 0
