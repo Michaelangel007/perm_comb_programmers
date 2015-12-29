@@ -1,3 +1,4 @@
+    // Forward mapping: # -> $
     char* itoa_perm_norep_natural( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
@@ -6,22 +7,26 @@
         if (base <  2) base =  2;
         if (base > 16) base = 16;
 
-        static char set[ 16 ]; // variable length array: set[ base ]
-        memcpy( set, SET, base ); // Optimization: strlen( SET )= base
+        const int        MAX_BASE = 16;
+        static char tmp[ MAX_BASE ]; // variable length array: set[ base ]
+        memcpy( tmp, SET, base );    // Optimization: strlen( SET ) == base
 
         int   r; // remainder
         char *dst = output;
+        int  fact = factorial( base - 1 );
 
         do
         {
-            r = n % base;
-            n = n / base;
-            *dst++ = set[ r ];
-// TODO: FIXME:
+            r  = n / fact; // Normally would be: n % base
+            n -= r * fact; // Normally would be: n / base // Optimization: n %= f;
+            *dst++ = tmp[ r ];
+
             --base;
-            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
+            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
+            fact /= base; // Optimization: Calculate previous factorial(base-1)
         } while (--length > 0);
 
+        *dst++ = tmp[ n % base ];
         *dst = 0;
         return output;
     }
