@@ -1211,12 +1211,12 @@ itoa_perm_norep( int n, int base )
 </p>
 <pre>
 +----------+-------------+----------------------------------------+
-| Ordered? | Repetition? | Type                                   |
+| Ordered? | Repetition? | Type        | Formula                  |
 +----------+-------------+----------------------------------------+
-| no       | no          | Combination = n! / ((n-r)! * r!)       |
-| no       | yes         | Combination = (n+r-1)! / ((n-1)! * r!) |
-| yes      | no          | Permutation = n! / (n-r)!              |
-| yes      | yes         | Permutation = n^r                      |
+| no       | no          | Combination | n! / ((n-r)! * r!)       |
+| no       | yes         | Combination | (n+r-1)! / ((n-1)! * r!) |
+| yes      | no          | Permutation | n! / (n-r)!              |
+| yes      | yes         | Permutation | n^r                      |
 +----------+-------------+----------------------------------------+
 </pre>
 <p>Clam up and show me the code already! So without further ado, here is a "cheat sheet" for permutations and combinations:</p>
