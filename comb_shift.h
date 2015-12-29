@@ -1,3 +1,4 @@
+    // Forward mapping: # -> $
     char* itoa_comb_shift( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
@@ -27,6 +28,7 @@
         return output;
     }
 
+    // Reverse mapping: $ -> #
     int atoi_comb_shift( const char *input, const int BASE, const char SET[] = "0123456789ABCDEF" )
     {
         const char *text   = input;

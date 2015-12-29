@@ -1,3 +1,4 @@
+    // Forward mapping: # -> $
     char* itoa_comb_fastswap( unsigned int n, int base, int length, const char MASTER_SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
@@ -27,6 +28,7 @@
         return output;
     }
 
+    // Reverse mapping: $ -> #
     int atoi_comb_fastswap( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
     {
         const char *text   = input;
