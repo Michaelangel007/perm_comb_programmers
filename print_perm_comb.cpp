@@ -4,6 +4,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 Alt. Title: The secret to understanding Permutations and Combinations for Programmers
 3rd. Title: Programmer's Guide to Combinations and Permutations
+4th. Title: What every programmer should know about permutations and combinations
 */
 
 #include <stdio.h>
@@ -33,13 +34,11 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
 
 // Permutations
 
-    #include "perm.h"
-    #include "comb_shift.h"
-    #include "comb_fastswap.h"
-    #include "comb_almost.h"
-    #include "comb_natural.h"
-
-// Print Permutations
+    #include "perm_rep.h"
+    #include "perm_norep_shift.h"
+    #include "perm_norep_fastswap.h"
+    #include "perm_norep_almost.h"
+    #include "perm_norep_natural.h"
 
     void permutations_rep()
     {
