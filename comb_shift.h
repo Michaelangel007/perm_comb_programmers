@@ -8,8 +8,8 @@
         if (base > 16) base = 16;
 
         const int        MAX_BASE = 16;
-        static char set[ MAX_BASE ]; // variable length array: set[ base ]
-        memcpy( set, SET, base ); // Optimization: strlen( SET )= base
+        static char tmp[ MAX_BASE ]; // variable length array: set[ base ]
+        memcpy( tmp, SET, base ); // Optimization: strlen( SET )= base
 
         int   r; // remainder
         char *dst = output;
@@ -18,10 +18,10 @@
         {
             r = n % base;
             n = n / base;
-            *dst++ = set[ r ];
+            *dst++ = tmp[ r ];
 
             --base;
-            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
+            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
         } while (--length > 0);
 
         *dst = 0;

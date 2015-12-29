@@ -1,5 +1,5 @@
     // Forward mapping: # -> $
-    char* itoa_comb_fastswap( unsigned int n, int base, int length, const char MASTER_SET[] = "0123456789ABCDEF" )
+    char* itoa_comb_fastswap( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
         static char output[ MAX_DIGITS + 1 ]; // base=2 output in binary is 32 digits
@@ -8,8 +8,8 @@
         if (base > 16) base = 16;
 
         const int        MAX_BASE = 16;
-        static char set[ MAX_BASE ]; // variable length array: set[ base ]
-        memcpy( set, MASTER_SET, base ); // Optimization: strlen( MASTER_SET ) == base
+        static char tmp[ MAX_BASE ]; // variable length array: set[ base ]
+        memcpy( tmp, SET, base ); // Optimization: strlen( SET ) == base
 
         int   r; // remainder
         char *dst = output;
@@ -18,8 +18,8 @@
         {
             r = n % base;
             n = n / base;
-            *dst++ = set[ r      ];
-            set[r] = set[ --base ]; 
+            *dst++ = tmp[ r      ];
+            tmp[r] = tmp[ --base ];
             // Optimization: instead of shifting workset over by one character
             // We move the last element into the slot that was just used
         } while (--length > 0);
