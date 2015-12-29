@@ -206,22 +206,35 @@ console.log( "0xFFFFFFFF = %s", itoa( 0xFFFFFFFF, 10 ) );
 <h1>Table of Contents</h1>
 
 <table>
-        <tr><td><a href="#Introduction">Introduction   </a></td></tr>
-        <tr><td><a href="#Context"     >Context        </a></td></tr>
-        <tr><td><a href="#Permutations">Permutations   </a></td></tr>
-        <tr><td><a href="#PermDefn"    > * Definition  </a></td></tr>
-        <tr><td><a href="#PermExplain" > * Explanation </a></td></tr>
-        <tr><td><a href="#PermExample" > * Example     </a></td></tr>
-        <tr><td><a href="#PermPrint"   > * Printing    </a></td></tr>
-        <tr><td><a href="#PermCode"    > * Code        </a></td></tr>
-        <tr><td><a href="#Combinations">Combinations   </a></td></tr>
-        <tr><td><a href="#CombDefn"    > * Definition  </a></td></tr>
-        <tr><td><a href="#CombExplain" > * Explanation </a></td></tr>
-        <tr><td><a href="#CombExample" > * Example     </a></td></tr>
-        <tr><td><a href="#CombPrint"   > * Printing    </a></td></tr>
-        <tr><td><a href="#CombCode"    > * Code        </a></td></tr>
-        <tr><td><a href="#Summary"     > * Summary     </a></td></tr>
-        <tr><td><a href="#References"  > * References  </a></td></tr>
+        <tr><td>      <a href="#Introduction"    >Introduction   </a></td></tr>
+        <tr><td>      <a href="#Context"         >Context        </a></td></tr>
+        <tr><td>      <a href="#Permutations"    >Permutations   </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermDefn"        >* Definition   </a></td></tr>
+        <tr><td>      <a href="#PermRe"          >Permutations (with repetition)</a></td></tr>
+        <tr><td>&nbsp;<a href="#PermRepExplain"  >* Explanation </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermRepExample"  >* Example     </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermRepPrint"    >* Printing    </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermRepCode"     >* Code        </a></td></tr>
+        <tr><td>      <a href="#PermNoRep"       >Permutations (without repetition)</a></td></tr>
+        <tr><td>&nbsp;<a href="#PermNoRepDefn"   >* Definition  </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermNoRepExplain">* Explanation </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermNoRepExample">* Example     </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermNoRepPrint"  >* Printing    </a></td></tr>
+        <tr><td>&nbsp;<a href="#PermNoRepCode"   >* Code        </a></td></tr>
+        <tr><td>      <a href="#Combinations"    >Combinations   </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombDefn"        > * Definition  </a></td></tr>
+        <tr><td>      <a href="#CombRep"         >Combinations (with repetition)</a></td></tr>
+        <tr><td>&nbsp;<a href="#CombRepExplain"  >* Explanation </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombRepExample"  >* Example     </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombRepPrint"    >* Printing    </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombRepCode"     >* Code        </a></td></tr>
+        <tr><td>      <a href="#CombRep"         >Combinations (without repetition)</a></td></tr>
+        <tr><td>&nbsp;<a href="#CombNoRepExplain"  >* Explanation </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombNoRepExample"  >* Example     </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombNoRepPrint"    >* Printing    </a></td></tr>
+        <tr><td>&nbsp;<a href="#CombNoRepCode"     >* Code        </a></td></tr>
+        <tr><td>&nbsp;<a href="#Summary"         >* Summary     </a></td></tr>
+        <tr><td>      <a href="#References"      >References  </a></td></tr>
 </table>
 
 <a id="Introduction"> 
@@ -789,17 +802,10 @@ function itoa_perm( n, base, length )
 <p>We'll explore the <b>reverse transform</b> <i>atoi_perm()</i> later.
 
 
-<h2>Combinations</h2>
+<h2>Permutations (without repetition)</h2>
 
-<a id="CombDefn">
-<h3>Combination Definition</h3>
-</a>
-
-<div class="defn">
-<i>Combinations:</i> a <b>subset</b> of permutations where order is <b>unimporant</b>.
-</div>
 <p>
- What this means is that once an element is used -- it can't be used again for <i>that</i> combination.
+What this means is that once an element is used -- it can't be used again for <i>that</i> permutation.
 </p>
 
 <!--
@@ -852,7 +858,7 @@ function itoa_perm( n, base, length )
 <p>
 Next, cross off entries that have duplicates elements:
 </p>
-<div class="eg">Combinations of A, B, C, and D with permutations crossed off:</div>
+<div class="eg">Permutations of A, B, C, and D with duplicate elements crossed off:</div>
 <div class="defn">
 <pre>
  <del>#<span class="i"> ? </span>AAA</del>    <del>#<span class="i"> ? </span>BAA</del>    <del>#<span class="i"> ? </span>CAA</del>    <del>#<span class="i"> ? </span>DAA</del>
@@ -878,7 +884,7 @@ Next, cross off entries that have duplicates elements:
 </div>
 <p>Then let's re-number the enumerations:
 </p>
-<div class="eg">Enumeration of Combinations of A, B, C, and D with permutations crossed off:</div>
+<div class="eg">Enumeration of Permutations of A, B, C, and D with duplicent elements crossed off:</div>
 <div class="defn">
 <pre>
  <del>#<span class="i"> - </span>AAA</del>    <del>#<span class="i"> - </span>BAA</del>    <del>#<span class="i"> - </span>CAA</del>    <del>#<span class="i"> - </span>DAA</del>
@@ -903,10 +909,9 @@ Next, cross off entries that have duplicates elements:
 </pre>
 </div>
 
-
 <p>Lastly, cleaning it up we are left with:</p>
 </p>
-<div class="eg">Combinations of A, B, C, and D (with <b>Natural Mapping</b>)</div>
+<div class="eg">Permutations of A, B, C, and D (with <b>Natural Mapping</b>)</div>
 <div class="defn">
 <pre>
 #<span class="i"> 0 </span>ABC    #<span class="i"> 6 </span>BAC    #<span class="i">12 </span>CAB    #<span class="i">18 </span>DAB
@@ -990,15 +995,15 @@ And Charles might chose (Alice's scheme +1):
 </div>
 
 <p>
-A. No, the number we assign to each combination entry doesn't matter <b>as long as we enumerate ALL combinations.</b>
+A. No, the number we assign to each permutation entry doesn't matter <b>as long as we enumerate ALL permutations.</b>
  This is why it is important to use the <i>same mapping for the forward and inverse.</i>
 </p>
 </pre>
-<p><b>Meta-Exercise</b>: How many different ways could we enumerate the combinations of ABCD picking 3 letters assigning each arrangement a different and unique number?
+<p><b>Meta-Exercise</b>: How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} picking 3 letters assigning each arrangement a different and unique number?
 </p>
 <p>
 Getting back to where we left off .. how do we calculate what the unique enumeration
- is so we can derive how to print combinations?
+ is so we can derive how to print these permutations?
  We'll also pretend we don't know the inital 'n' is -- however let's "do the math" and
  see what operations are done on it.  Since we already know the partial results we can
  use simple logic to deduce the mathematical operations that need to be performed on it
@@ -1015,21 +1020,21 @@ Getting back to where we left off .. how do we calculate what the unique enumera
 Hmmm, we are closer, but still don't have an obvious algorithm.
 </p>
 <p>Recall that in permutations each succesive digit was multiplied by the constant base raised to a increasing power.
- In combinations the base keeps shrinking. Why?  In <i>permutations</i> we <b>can</b> re-use elements, in <i>combinations</i> we <b>can't.</b>
+ In combinations the base keeps shrinking. Why?  In <i>permutations with repetitions</i> we <b>can</b> re-use elements, in <i>permutations without repetitions</i> we <b>can't.</b>
  A simple way to think of this is to pretend we have a bag with the 4 elements in it:
 <pre>
     Set = { '<span class="char">A</span>','<span class="char">B</span>','<span class="char">C</span>','<span class="char">D</span>' } 
 </pre>
 <p>
 Every time we "peel off a digit", we pull an element out of the bag. 
- The difference is that once we pull '<span class="char">D</span>' out of the bag we <b>leave it out</b> for the rest of <b>that</b> combination.
+ The difference is that once we pull '<span class="char">D</span>' out of the bag we <b>leave it out</b> for the rest of <b>that</b> arrangement.
  In essence, this means:
 </p>
-<div class="eg">Algorithm difference between Permutations and Combinations:</div>
+<div class="eg">Algorithm difference between Permutations with repetition and without repetition:</div>
 <div class="ex">
-For <b>permutations</b> we divide the numerator by a <b>constant</b> amount.
+For Permutations <b>with repetition</b> we divide the numerator by a <b>constant</b> amount.
 <br>
-For <b>combinations</b> we divide the numerator by a <b>variable</b> amount.
+For Permutations <b>without repetitions</b> we divide the numerator by a <b>variable</b> amount.
 </div>
 </div>
 <p>
@@ -1046,7 +1051,7 @@ Recall that the heart of the permutations itoa_perm() was this:
 
 </pre>
 <p>
-Let's gently massage this to behave how combinations are defined.
+Let's gently massage this to behave how repetitions should be calculated:
 </p>
 <p>
 First, the base must decrease:
@@ -1062,18 +1067,19 @@ First, the base must decrease:
 </pre>
 <p>
 Is that enough?  No, because we haven't actually <b>removed</b> the element 'r' from the set to prevent re-use!
-Let's call the set passed into itoa() our <b>master set</b>,
- and the set used for printing the <b>working set</b> as we remove elements.  We'll also need to initialize our working set.
+Let's call the set passed into itoa() our <b>master set</b> (<span class="code">set</span>),
+ and the set used for printing the <b>working set</b> (<span class="code">tmp</span>) as we remove elements.  We'll also need to initialize our working set.
 </p>
 
 <pre>
-char* itoa_comb( uint32_t n, int base, int length, const char masterSet[] = "0123456789ABCDEF" )
+char* itoa_perm_norep( uint32_t n, int base, int length, const char set[] = "0123456789ABCDEF" )
 {
     <b>const  int</b>          MAX_DIGITS = 32;
     <b>static char</b> output[ MAX_DIGITS + 1 ];
 
-    <b>static char</b> set[ MAX_DIGITS ];
-    memcpy( set, masterSet, base );
+    <b>const int</b>        MAX_BASE = 16;
+    <b>static char</b> tmp[ MAX_BASE ];
+    memcpy( tmp, set, base );
 
     int r;
     <b>char</b> *dst = output; // print left to right!
@@ -1093,7 +1099,7 @@ char* itoa_comb( uint32_t n, int base, int length, const char masterSet[] = "012
 }
 </pre>
 <p>
-Similiar to what we did with permutations let us walk through the combination steps to verify our algorithm..
+Similiar to what we did with <i>permutations with repetitions</i> let us walk through the <i>permutations without repetitions</i> steps to verify our algorithm.
 </p>
 <pre>
       n    n % b     n / b    Set[ n % b ]
@@ -1118,24 +1124,7 @@ Remove 'A' from the bag:
 
 Remove 'C' from the bag.
 </pre>
-
-
-
-
-atoi_comb()
-
-
-
-
-
-Let's 
 </p>
-
-
-
-
-
-Say what?!
 </p>
 
 Let's say we want to calculate the 15th permutation:
@@ -1150,7 +1139,7 @@ second digit: n % 3 = 5 % 3 = 2, therefore 'C'
 third digit: n % 3 = 1 % 3 = 1, therefore 'B'
 </pre>
 <p>
-Let's walk through the 5th combination
+Let's walk through the 5th permutation
 </p>
 
 <pre>
@@ -1167,13 +1156,13 @@ Now 'B' is also 'used' so  we can't reuse it either.  We again change our base f
 third digit: 0 % 1 = 1, therefore 'A' 
 </pre>
 
-<p>Lets write up the algorithm for combinations:
+<p>Lets write up the algorithm for permutations without repetitions:
 </p>
 <pre>
-itoa_comb( int n, int base )
+itoa_perm_norep( int n, int base )
 {
     const  char mainset[] = "0123456789ABCDEF";
-    /* */  char workset[] = 0; // not const for combination!
+    /* */  char workset[] = 0; // not const for no repetion!
     /* */  int  length    = 0;
 
     const  int          LEN = 32;
@@ -1199,23 +1188,41 @@ itoa_comb( int n, int base )
 </pre>
 
 
+<h2>Combinations</h2>
+
+<a id="CombDefn">
+<h3>Combination Definition</h3>
+</a>
+
+
+<div class="defn">
+<i>Combinations:</i> a <b>subset</b> of permutations where order is <b>unimporant</b>.
+</div>
+
+<p>Similiar to permutations we again have two cases.
+
+* With repetitions
+* Without repetitions
+</p>
+
 <a id="Summary">
 <h2>Summary</h2>
 <p>Enough rambling! Clam up and show me the code already!</p>
+
 <p>Here is a "cheat sheet" for permutations and combinations:</p>
 
 <div class="ex">
 <table style="width:25%">
     <tr>
-        <td><b>Permutation:</b> <span class="note">Constant</span> bit-rate</td>
-        <td><b>Combination:</b> <span class="note">Variable</span> bit-rate</td>
+        <td><b>Permutation: (Repetitions)</b> <span class="note">Constant</span> bit-rate</td>
+        <td><b>Permutation: (No Repetition)</b> <span class="note">Variable</span> bit-rate</td>
     </tr>
     <tr>
         <td>Right to Left printing</td><td>Left to Right printing</td>
     </tr>
     <tr>
         <td>
-      <div class="code"><span class="keyword">char</span><span class="op">*</span> itoa_perm<span class="paren">(</span> <span class="keyword">int</span> n, <span class="keyword">int</span> base <span class="paren">)</span>
+      <div class="code"><span class="keyword">char</span><span class="op">*</span> itoa_perm_rep<span class="paren">(</span> <span class="keyword">int</span> n, <span class="keyword">int</span> base <span class="paren">)</span>
 </div><div class="code"><span class="brace">{</span>
 </div><div class="code">    <span class="keyword">const</span>  <span class="keyword">char</span> set<span class="bracket">[]</span>  <span class="op">=</span> "<span class="char">0123456789ABCDEF</span>";
 </div><div class="code">    <span class="comment">/* */</span>  <span class="keyword">int</span>  length <span class="op">=</span> <span class="digit">0;
@@ -1248,7 +1255,7 @@ itoa_comb( int n, int base )
 </div><div class="code"><span class="brace">}</span>
 </div>
         </td><td>
-      <div class="code">char* itoa_comb( int n, int base )
+      <div class="code">char* itoa_perm_norep( int n, int base )
 </div><div class="code">{
 </div><div class="code">    /* */  char set[]  =  "0123456789ABCDEF";
 </div><div class="code">    /* */  int  length = 0;
@@ -1283,7 +1290,7 @@ itoa_comb( int n, int base )
         </td>
     </tr>
     <tr><td>
-      <div class="code"><span class="keyword">int</span> atoi_perm( <span class="keyword">const char</span> <span class="op">*</span>input, <span class="keyword">const int</span> base, <span class="keyword">const char</span> set<span class="bracket">[]</span> <span class="op">=</span> "<span class="char">0123456789ABCDEF</span>" <span class="paren">)</span>
+      <div class="code"><span class="keyword">int</span> atoi_perm_rep( <span class="keyword">const char</span> <span class="op">*</span>input, <span class="keyword">const int</span> base, <span class="keyword">const char</span> set<span class="bracket">[]</span> <span class="op">=</span> "<span class="char">0123456789ABCDEF</span>" <span class="paren">)</span>
 </div><div class="code"><span class="brace">{</span>
 </div><div class="code">    <span class="keyword">const char</span> <span class="op">*</span>text   <span class="op">=</span> input;
 </div><div class="code">    <span class="comment">/* */</span> <span class="keyword">int</span>   digits <span class="op">=</span> strlen<span class="paren">(</span> input <span class="paren">)</span>;
@@ -1309,7 +1316,7 @@ itoa_comb( int n, int base )
 </div><div class="code"><span class="brace">}</span>
 </div>
 </td><td>
-      <div class="code">int atoi_comb( const char *input, const int BASE, const char SET[] = "0123456789ABCDEF" )
+      <div class="code">int atoi_perm_norep( const char *input, const int BASE, const char SET[] = "0123456789ABCDEF" )
 </div><div class="code">{
 </div><div class="code">    const char *text   = input;
 </div><div class="code">    /* */ int   digits = strlen( input );
@@ -1338,13 +1345,23 @@ itoa_comb( int n, int base )
 </table>
 </div>
 
+<div class="ex">
+<table style="width:25%">
+    <tr>
+        <td><b>Combination: (Repetitions)</b> <span class="note">???</span> bit-rate</td>
+        <td><b>Combination: (No Repetition)</b> <span class="note">???</span> bit-rate</td>
+    </tr>
+    <tr>
+
 <a id="References">
 <h2>References</h2>
 <ul>
 <li> http://math.stackexchange.com/questions/349924/function-mapping-combinations-to-natural-numbers
 <li> http://en.wikipedia.org/wiki/Combinatorial_number_system
 <li> https://en.wikipedia.org/wiki/Factorial_number_system
+<li> https://en.wikipedia.org/wiki/Combination
 <li> http://www.mathsisfun.com/combinatorics/combinations-permutations.html
+<li> https://www.mathsisfun.com/combinatorics/combinations-permutations-calculator.html
 </ul>
     </body>
 </html>
