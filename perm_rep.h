@@ -1,4 +1,4 @@
-    char* itoa_perm( unsigned int n, int base, int length, const char set[] = "0123456789ABCDEF" )
+    char* itoa_perm_rep( unsigned int n, unsigned int base, int length, const char set[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
         static char output[ MAX_DIGITS + 1 ];
@@ -20,7 +20,7 @@
         return dst+1;
     }
 
-    int atoi_perm( const char *input, const int base, const char set[] = "0123456789ABCDEF" )
+    int atoi_perm_rep( const char *input, const unsigned int base, const char set[] = "0123456789ABCDEF" )
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );

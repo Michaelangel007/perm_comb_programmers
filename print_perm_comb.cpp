@@ -40,6 +40,8 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
     #include "perm_norep_almost.h"
     #include "perm_norep_natural.h"
 
+/*
+*/
     void permutations_rep()
     {
         char *expect, *actual;
@@ -47,15 +49,15 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         int  digits = 3;
         char set[]  = "ABCD";
 
-        printf( "= Permutations =\n" );
+        printf( "= Permutations (with repetitions) =\n" );
        
         for( int i = 0; i < 64; i++ )
         {
-            expect = itoa_perm( i, base, digits, set );
+            expect = itoa_perm_rep( i, base, digits, set );
             printf( "#%2d: %s", i, expect );
 
-            int n  = atoi_perm( expect, base, set );
-            actual = itoa_perm( n, base, digits, set );
+            int n  = atoi_perm_rep( expect, base, set );
+            actual = itoa_perm_rep( n, base, digits, set );
 
             printf( " -> %2d -> %s\n", n, actual );
         }
@@ -72,7 +74,6 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         #2   10   C
         #3   11   D
 
-    Id    memcpy()   set[r] Different   Natural
     # 0   ABC        ADC    *20         ABC 0 0 0
     # 1   BAC        BAC                ABD 0 0 1
     # 2   CAB        CAD    *14         ACB 0 1 0
@@ -107,8 +108,8 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         char set[]  = "ABCD";
         int  n;
 
-        printf( "= Combinations =\n" );
-        printf( "Id#   shift: memcpy()    fast: set[r]       Almost             Natural\n" );
+        printf( "= Permutations (without repetition) =\n" );
+        printf( "P#    shift: memcpy()    fast: set[r]       Almost             Natural\n" );
 
         for( int i = 0; i < 24; i++ )
 //int i = 19;
@@ -156,10 +157,12 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
 
     void combinations_rep()
     {
+        printf( "= Combinations (with repetitions) =\n" );
     }
 
     void combinations_norep()
     {
+        printf( "= Combinations (without repetition) =\n" );
     }
 
 int main()
