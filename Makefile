@@ -1,9 +1,10 @@
-all: demo_comb_fastswap demo_comb_natural demo_comb_shift
+all: demo_comb_fastswap demo_comb_natural demo_comb_shift print_perm_comb
 
 clean:
 	rm demo_comb_fastswap
 	rm demo_comb_natural
 	rm demo_comb_shift
+	rm print_perm_comb
 
 # Might map to gcc or clang
 # Or if you have a specific version of GCC installed
@@ -23,5 +24,8 @@ demo_comb_natural: comb_natural.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 demo_comb_shift: comb_shift.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+print_perm_comb: print_perm_comb.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
