@@ -154,7 +154,11 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
             memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
     */
 
-    void combinations()
+    void combinations_rep()
+    {
+    }
+
+    void combinations_norep()
     {
     }
 
@@ -162,7 +166,9 @@ int main()
 {
     permutations_rep();
     permutations_norep();
-    combinations();
+    combinations_rep();
+    combinations_norep();
 
     return 0;
 }
+
