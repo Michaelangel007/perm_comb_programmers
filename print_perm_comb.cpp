@@ -73,31 +73,6 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         #1   01   B
         #2   10   C
         #3   11   D
-
-    # 0   ABC        ADC    *20         ABC 0 0 0
-    # 1   BAC        BAC                ABD 0 0 1
-    # 2   CAB        CAD    *14         ACB 0 1 0
-    # 3   DAB        DAC    *15         ACD 0 1 2
-    # 4   ACB        ABD    *12         ADB 0 2 0
-    # 5   BCA        BDA    *9          ADC 0 2 1
-    # 6   CBA        CBA                BAC 1 0 0
-    # 7   DBA        DBA                BAD 1 0 1
-    # 8   ADB        ACD    *16         BCA 1 
-    # 9   BDA        BCA    *5          BCD 1
-    #10   CDA        CDA                BDA 1
-    #11   DCA        DCA                BDC 1
-    #12   ABD        ADB    *8          CAB 2
-    #13   BAD        BAD                CAD 2
-    #14   CAD        CAB    *2          CBA 2
-    #15   DAC        DAB    *3          CBD 2
-    #16   ACD        ABC    *0          CDA 2
-    #17   BCD        BDC    *21         CDB 2
-    #18   CBD        CBD                DAB 3
-    #19   DBC        DBC                DAC 3
-    #20   ADC        ACB    *4          DBA 3
-    #21   BDC        BCD    *17         DBC 3
-    #22   CDB        CDB                DCA 3
-    #23   DCB        DCB                DCB 3 2 1
 */
     
     void permutations_norep()
@@ -112,7 +87,6 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         printf( "P#    shift: memcpy()    fast: set[r]       Almost             Natural\n" );
 
         for( int i = 0; i < 24; i++ )
-//int i = 19;
         {
             printf( "#%2d", i );
 
