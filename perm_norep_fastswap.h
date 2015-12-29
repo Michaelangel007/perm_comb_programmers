@@ -1,5 +1,5 @@
     // Forward mapping: # -> $
-    char* itoa_comb_fastswap( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
+    char* itoa_perm_norep_fastswap( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
         static char output[ MAX_DIGITS + 1 ]; // base=2 output in binary is 32 digits
@@ -29,7 +29,7 @@
     }
 
     // Reverse mapping: $ -> #
-    int atoi_comb_fastswap( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
+    int atoi_perm_norep_fastswap( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );

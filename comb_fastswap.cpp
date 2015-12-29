@@ -7,12 +7,13 @@ https://github.com/Michaelangel007/perm_comb_programmers
 #include <alloca.h>
 #include <string.h>
 
-// Combinations
-#include "comb_fastswap.h"
+// Permutation
+#include "util.h"
+#include "perm_norep_fastswap.h"
 
 // Demo
     /*
-        Map unique id to combination with fast swap
+        Map unique id to permutation with fast swap
 
             Dec  Bin  Elem
             #0   00   A
@@ -21,7 +22,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# set[r]
+            Id# set
             # 0 ADC
             # 1 BAC
             # 2 CAD
@@ -47,19 +48,19 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #22 CDB
             #23 DCB
     */
-    void demo_comb_fastswap()
+    void demo_perm_fastswap()
     {
         char *output;
         int  base   = 4;
         int  digits = 3;
         char set[]  = "ABCD";
 
-        printf( "= Combinations (Fast Swap) =\n" );
-        printf( "Id# set[r]\n" );
+        printf( "= Permtuation (Fast Swap) =\n" );
+        printf( "Id# set\n" );
 
         for( int i = 0; i < 24; i++ )
         {
-            output = itoa_comb_fastswap( i, base, digits, set );
+            output = itoa_perm_norep_fastswap( i, base, digits, set );
             printf( "#%2d %s\n", i, output );
         }
 
@@ -68,7 +69,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 int main()
 {
-    demo_comb_fastswap();
+    demo_perm_fastswap();
 
     return 0;
 }

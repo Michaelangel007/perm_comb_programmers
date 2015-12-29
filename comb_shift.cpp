@@ -7,12 +7,13 @@ https://github.com/Michaelangel007/perm_comb_programmers
 #include <alloca.h>
 #include <string.h>
 
-// Combinations
-#include "comb_shift.h"
+// Permutation
+#include "util.h"
+#include "perm_norep_shift.h"
 
 // Demo
     /*
-        Map unique id to combination with natural
+        Map unique id to permutation with shift
 
             Dec  Bin  Elem
             #0   00   A
@@ -47,19 +48,19 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #22 CDB
             #23 DCB
     */
-    void demo_comb_shift()
+    void demo_perm_shift()
     {
         char *output;
         int  base   = 4;
         int  digits = 3;
         char set[]  = "ABCD";
 
-        printf( "= Combinations (Shift) =\n" );
-        printf( "Id# memcpy()\n" );
+        printf( "= Permutation (shift) =\n" );
+        printf( "P#  shift\n" );
 
         for( int i = 0; i < 24; i++ )
         {
-            output = itoa_comb_shift( i, base, digits, set );
+            output = itoa_perm_norep_shift( i, base, digits, set );
             printf( "#%2d %s\n", i, output );
         }
 
@@ -68,7 +69,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 int main()
 {
-    demo_comb_shift();
+    demo_perm_shift();
 
     return 0;
 }

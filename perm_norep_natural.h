@@ -1,4 +1,4 @@
-    char* itoa_comb_natural( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
+    char* itoa_perm_norep_natural( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
         static char output[ MAX_DIGITS + 1 ];
@@ -25,3 +25,23 @@
         *dst = 0;
         return output;
     }
+
+    // Reverse mapping: $ -> #
+    int atoi_perm_norep_natural( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
+    {
+        const char *text   = input;
+        /* */ int   digits = strlen( input );
+        /* */ int   n = 0, r, b = 1, base = BASE; // default to base
+
+        const int        MAX_BASE = 16;
+        static char set[ MAX_BASE ];
+        memcpy( set, SET, base );
+
+        for(int length = 0; length < digits; length++ )
+        {
+            r = find( base, set, *text++ );
+        }
+
+        return n;
+    }
+

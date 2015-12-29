@@ -35,19 +35,19 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
 // Permutations
 
     #include "perm_rep.h"
-    #include "perm_norep_shift.h"
-    #include "perm_norep_fastswap.h"
     #include "perm_norep_almost.h"
+    #include "perm_norep_fastswap.h"
     #include "perm_norep_natural.h"
+    #include "perm_norep_shift.h"
 
 /*
 */
     void permutations_rep()
     {
         char *expect, *actual;
-        int  base   = 4;
-        int  digits = 3;
-        char set[]  = "ABCD";
+        int   base   = 4;
+        int   digits = 3;
+        char  set[]  = "ABCD";
 
         printf( "= Permutations (with repetitions) =\n" );
        
@@ -78,10 +78,10 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
     void permutations_norep()
     {
         char *expect, *actual;
-        int  base   = 4;
-        int  digits = 3;
-        char set[]  = "ABCD";
-        int  n;
+        int   base   = 4;
+        int   digits = 3;
+        char  set[]  = "ABCD";
+        int   n;
 
         printf( "= Permutations (without repetition) =\n" );
         printf( "P#    shift: memcpy()    fast: set[r]       Almost             Natural\n" );
@@ -90,26 +90,29 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         {
             printf( "#%2d", i );
 
-            expect = itoa_comb_shift( i, base, digits, set );
+            expect = itoa_perm_norep_shift( i, base, digits, set );
             printf( "   %s", expect );
-                n  = atoi_comb_shift( expect, base, set );
-            actual = itoa_comb_shift( n, base, digits, set );
+                n  = atoi_perm_norep_shift( expect, base, set );
+            actual = itoa_perm_norep_shift( n, base, digits, set );
             printf( " -> %2d -> %s", n, actual );
 
-            expect = itoa_comb_fastswap( i, base, digits, set );
+            expect = itoa_perm_norep_fastswap( i, base, digits, set );
             printf( "   %s", expect );
-                n  = atoi_comb_fastswap( expect, base, set );
-            actual = itoa_comb_fastswap( n, base, digits, set );
+                n  = atoi_perm_norep_fastswap( expect, base, set );
+            actual = itoa_perm_norep_fastswap( n, base, digits, set );
             printf( " -> %2d -> %s", n, actual );
 
-            expect = itoa_comb_almost( i, base, digits, set );
+            expect = itoa_perm_norep_almost( i, base, digits, set );
             printf( "   %s", expect );
-                n  = atoi_comb_almost( expect, base, set );
-            actual = itoa_comb_almost( n, base, digits, set );
+                n  = atoi_perm_norep_almost( expect, base, set );
+            actual = itoa_perm_norep_almost( n, base, digits, set );
             printf( " -> %2d -> %s", n, actual );
 
-            expect = itoa_comb_natural( i, base, digits, set );
+            expect = itoa_perm_norep_natural( i, base, digits, set );
             printf( "   %s", expect );
+                n  = atoi_perm_norep_natural( expect, base, set );
+            actual = itoa_perm_norep_natural( n, base, digits, set );
+            printf( " -> %2d -> %s", n, actual );
 
             printf( "\n" );
         }

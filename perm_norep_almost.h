@@ -1,5 +1,5 @@
     // Forward mapping: # -> $
-    char* itoa_comb_almost( unsigned int n, unsigned int base, int length, const char SET[] = "0123456789ABCDEF" )
+    char* itoa_perm_norep_almost( unsigned int n, unsigned int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
         static char output[ MAX_DIGITS + 1 ];
@@ -19,7 +19,7 @@
             *dst++ = tmp[ r ];
 
             --base;
-            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
+            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element, shift remaining elements
 
             r += n % base;
             n  = n / base;
@@ -32,7 +32,7 @@
     }
 
     // Reverse mapping: $ -> #
-    int atoi_comb_almost( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
+    int atoi_perm_norep_almost( const char *input, int BASE, const char SET[] = "0123456789ABCDEF" )
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );
