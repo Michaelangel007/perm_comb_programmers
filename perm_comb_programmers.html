@@ -1207,9 +1207,19 @@ itoa_perm_norep( int n, int base )
 
 <a id="Summary">
 <h2>Summary</h2>
-<p>Enough rambling! Clam up and show me the code already!</p>
-
-<p>Here is a "cheat sheet" for permutations and combinations:</p>
+<p>Enough rambling!
+</p>
+<pre>
++----------+-------------+----------------------------------------+
+| Ordered? | Repetition? | Type                                   |
++----------+-------------+----------------------------------------+
+| no       | no          | Combination = n! / ((n-r)! * r!)       |
+| no       | yes         | Combination = (n+r-1)! / ((n-1)! * r!) |
+| yes      | no          | Permutation = n! / (n-r)!              |
+| yes      | yes         | Permutation = n^r                      |
++----------+-------------+----------------------------------------+
+</pre>
+<p>Clam up and show me the code already! So without further ado, here is a "cheat sheet" for permutations and combinations:</p>
 
 <div class="ex">
 <table style="width:25%">
