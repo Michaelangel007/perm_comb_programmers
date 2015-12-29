@@ -18,18 +18,18 @@ CC=gcc
 # See: http://clang.llvm.org/docs/UsersManual.html
 CFLAGS= -Wall -Wextra -Wpedantic
 
-demo_perm_almost:   demo_perm_almost.cpp
+demo_perm_almost:   demo_perm_almost.cpp   util.h perm_norep_almost.h
 	$(CC) $(CFLAGS) $< -o $@
 
-demo_perm_fastswap: demo_perm_fastswap.cpp
+demo_perm_fastswap: demo_perm_fastswap.cpp util.h perm_norep_fastswap.h
 	$(CC) $(CFLAGS) $< -o $@
 
-demo_perm_natural:  demo_perm_natural.cpp
+demo_perm_natural:  demo_perm_natural.cpp  util.h perm_norep_natural.h
 	$(CC) $(CFLAGS) $< -o $@
 
-demo_perm_shift:    demo_perm_shift.cpp
+demo_perm_shift:    demo_perm_shift.cpp    util.h perm_norep_shift.h
 	$(CC) $(CFLAGS) $< -o $@
 
-print_perm_comb: print_perm_comb.cpp
+print_perm_comb: print_perm_comb.cpp       util.h
 	$(CC) $(CFLAGS) $< -o $@
 
