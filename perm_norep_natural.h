@@ -24,7 +24,7 @@
             --base;
             memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
             fact /= base; // Optimization: Calculate previous factorial(base-1)
-        } while (--length > 0);
+        } while (--length > 1);
 
         *dst++ = tmp[ n % base ];
         *dst = 0;
