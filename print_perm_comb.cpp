@@ -15,21 +15,21 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
     #include "util.h"
 
 /*
-   https://www.mathsisfun.com/combinatorics/combinations-permutations-calculator.html
+    | Ordered? | Repetition? | Type                                   |
+    | no       | no          | Combination = n! / ((n-r)! * r!)       |
+    | no       | yes         | Combination = (n+r-1)! / ((n-1)! * r!) |
+    | yes      | no          | Permutation = n! / (n-r)!              |
+    | yes      | yes         | Permutation = n^r                      |
 
-   | Ordered? | Repetition? | Type                                   |
-   | no       | no          | Combination = n! / ((n-r)! * r!)       |
-   | no       | yes         | Combination = (n+r-1)! / ((n-1)! * r!) |
-   | yes      | no          | Permutation = n! / (n-r)!              |
-   | yes      | yes         | Permutation = n^r                      |
+    Without repetitions:
 
-            ( n )     n!
-   P(n,r) = (   ) = ------
-            ( r )   (n-r)!
+             ( n )     n!
+    P(n,r) = (   ) = ------
+             ( r )   (n-r)!
 
-            ( n )      n!
-   C(n,r) = (   ) = --------
-            ( r )   r!(n-r!)
+             ( n )      n!
+    C(n,r) = (   ) = --------
+             ( r )   r!(n-r!)
 */
 
 // Permutations
