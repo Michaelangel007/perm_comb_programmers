@@ -1,9 +1,10 @@
-all: demo_comb_fastswap demo_comb_natural demo_comb_shift print_perm_comb
+all: demo_perm_almost demo_perm_fastswap demo_perm_natural demo_perm_shift print_perm_comb
 
 clean:
-	rm demo_comb_fastswap
-	rm demo_comb_natural
-	rm demo_comb_shift
+	rm demo_perm_almost
+	rm demo_perm_fastswap
+	rm demo_perm_natural
+	rm demo_perm_shift
 	rm print_perm_comb
 
 # Might map to gcc or clang
@@ -17,13 +18,16 @@ CC=gcc
 # See: http://clang.llvm.org/docs/UsersManual.html
 CFLAGS= -Wall -Wextra -Wpedantic
 
-demo_comb_fastswap: comb_fastswap.cpp
+demo_perm_almost:   demo_perm_almost.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
-demo_comb_natural: comb_natural.cpp
+demo_perm_fastswap: demo_perm_fastswap.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
-demo_comb_shift: comb_shift.cpp
+demo_perm_natural:  demo_perm_natural.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+demo_perm_shift:    demo_perm_shift.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 print_perm_comb: print_perm_comb.cpp
