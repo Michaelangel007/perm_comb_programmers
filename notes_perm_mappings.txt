@@ -13,6 +13,15 @@ n   r = n % base  FastSwap  Natural   Shift
 15    = 15 % 4    ABCD      ABCD      ABCD
       = 3           
 
+
+    Mapping unique id to permutation (without repetition)
+
+        Dec  Bin  Element
+        #0   00   A
+        #1   01   B
+        #2   10   C
+        #3   11   D
+
     Id    memcpy()   set[r] Different   Natural
     # 0   ABC        ADC    *20         ABC 0 0 0
     # 1   BAC        BAC                ABD 0 0 1
@@ -38,4 +47,7 @@ n   r = n % base  FastSwap  Natural   Shift
     #21   BDC        BCD    *17         DBC 3
     #22   CDB        CDB                DCA 3
     #23   DCB        DCB                DCB 3 2 1
+
+
+    Id    almost   fast   natural   shift
 
