@@ -13,7 +13,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 // Demo
     /*
-        Map unique id to permutation with shift
+        Map unique id to permutation with 'shift'
 
             Dec  Bin  Elem
             #0   00   A
@@ -22,7 +22,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# shift
+            P#  set
             # 0 ABC
             # 1 BAC
             # 2 CAB
@@ -56,7 +56,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
         char set[]  = "ABCD";
 
         printf( "= Permutation (shift) =\n" );
-        printf( "P#  shift\n" );
+        printf( "P#  set\n" );
 
         for( int i = 0; i < 24; i++ )
         {

@@ -7,13 +7,13 @@ https://github.com/Michaelangel007/perm_comb_programmers
 #include <alloca.h>
 #include <string.h>
 
-// Combinations
+// Permutation
 #include "util.h"
 #include "perm_norep_natural.h"
 
 // Demo
     /*
-        Map unique id to permutation with natural
+        Map unique id to permutation with 'natural'
 
             Dec  Bin  Elem
             #0   00   A
@@ -22,28 +22,25 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# natural
+            P#  set
             # 0 ABC
             # 1 ABD
             # 2 ACB
             # 3 ACD
             # 4 ADB
             # 5 ADC
-
             # 6 BAC
             # 7 BAD
             # 8 BCA
             # 9 BCD
             #10 BDA
             #11 BDC
-
             #12 CAB
             #13 CAD
             #14 CBA
             #15 CBD
             #16 CDA
             #17 CDB
-
             #18 DAB
             #19 DAC
             #20 DBA
@@ -59,7 +56,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
         char  set[]  = "ABCD";
 
         printf( "= Permtuation (natural) =\n" );
-        printf( "P#  natural\n" );
+        printf( "P#  set\n" );
 
         for( int i = 0; i < 24; i++ )
         {

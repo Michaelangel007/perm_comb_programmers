@@ -13,7 +13,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 // Demo
     /*
-        Map unique id to permutation with almost
+        Map unique id to permutation with 'almost'
 
             Dec  Bin  Elem
             #0   00   A
@@ -22,30 +22,30 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# shift
+            P#  set
             # 0 ABC
-            # 1 BAC
-            # 2 CAB
-            # 3 DAB
+            # 1 ACD
+            # 2 ADB
+            # 3 ABD
             # 4 ACB
-            # 5 BCA
-            # 6 CBA
-            # 7 DBA
-            # 8 ADB
-            # 9 BDA
-            #10 CDA
-            #11 DCA
-            #12 ABD
-            #13 BAD
-            #14 CAD
-            #15 DAC
-            #16 ACD
-            #17 BCD
-            #18 CBD
+            # 5 ADC
+            # 6 BCD
+            # 7 BDA
+            # 8 BAC
+            # 9 BCA
+            #10 BDC
+            #11 BAD
+            #12 CDA
+            #13 CAB
+            #14 CBD
+            #15 CDB
+            #16 CAD
+            #17 CBA
+            #18 DAB
             #19 DBC
-            #20 ADC
-            #21 BDC
-            #22 CDB
+            #20 DCA
+            #21 DAC
+            #22 DBA
             #23 DCB
     */
     void demo_perm_almost()
@@ -56,7 +56,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
         char set[]  = "ABCD";
 
         printf( "= Permutation (almost) =\n" );
-        printf( "P#  almost\n" );
+        printf( "P#  set\n" );
 
         for( int i = 0; i < 24; i++ )
         {

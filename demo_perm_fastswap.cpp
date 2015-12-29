@@ -13,7 +13,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
 // Demo
     /*
-        Map unique id to permutation with fast swap
+        Map unique id to permutation with 'fast swap'
 
             Dec  Bin  Elem
             #0   00   A
@@ -22,7 +22,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
             #3   11   D
 
         Ouput:
-            Id# set
+            P#  set
             # 0 ADC
             # 1 BAC
             # 2 CAD
@@ -56,7 +56,7 @@ https://github.com/Michaelangel007/perm_comb_programmers
         char set[]  = "ABCD";
 
         printf( "= Permtuation (Fast Swap) =\n" );
-        printf( "Id# set\n" );
+        printf( "P#  set\n" );
 
         for( int i = 0; i < 24; i++ )
         {
