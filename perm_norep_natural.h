@@ -37,7 +37,7 @@
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );
-        /* */ int   n      = 0, r, b = 1, base = BASE; // default to base
+        /* */ int   n      = 0, r, b = factorial( BASE - 1 ), base = BASE;
 
         if (base <  2) base =  2;
         if (base > 16) base = 16;
@@ -49,12 +49,12 @@
         for( int length = 0; length < digits; length++ )
         {
             r = find( base, set, *text++ );
+            if (r < 0)
+                return n;
 
-
-// TODO: FIXME:
-            n *= base;
-            b *= base;
-            --base;
+            n += (r * b);
+            --base;;
+            b /= base;
             memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
         }
 
