@@ -928,14 +928,14 @@ Next, cross off entries that have duplicates elements:
 This begs the question:
 </p>
 <ul>
-<li>How do we calculate the <b>forward</b> transform? i.e. Given C#<span class="i">15</span> calculate "DAC" ?</li>
+<li>How do we calculate the <b>forward</b> transform? i.e. Given P#<span class="i">15</span> calculate "DAC" ?</li>
 <li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number C#<span class="i">15</span></li>
 </ul>
-<p>Hold-up!  Didn't I make a typo? DAC is C#<span class="i">19</span>, not C#<span class="i">15</span>!
+<p>Hold-up!  Didn't I make a typo? DAC is P#<span class="i">19</span>, not P#<span class="i">15</span>!
  There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen.
 </p>
 
-<p>For example we could have this "forward mapping" (See example: <span class="code">comb_natural.cpp</span>):
+<p>For example we could have this "forward mapping" (See example: <span class="code">demo_perm_natural.cpp</span>):
 </p>
 <div class="defn">
 <pre>
@@ -947,7 +947,7 @@ This begs the question:
 #<span class="i">20 </span>ADC    #<span class="i">21 </span>BDC    #<span class="i">22 </span class="i">CDB    #<span class="i">23 </span>DCB
 </pre>
 </div>
-<p>Or this mapping: (See example: <span class="code">comb_fastswap.cpp</span>)</p>
+<p>Or this mapping: (See example: <span class="code">demo_perm_fastswap.cpp</span>)</p>
 <div class="defn">
 <pre>
 #<span class="digit"> 0 </span>ADC    #<span class="digit"> 1 </span class="digit">BAC    #<span class="digit"> 2 </span>CAD    #<span class="digit"> 3 </span>DAC
@@ -995,12 +995,42 @@ And Charles might chose (Alice's scheme +1):
 </div>
 
 <p>
-A. No, the number we assign to each permutation entry doesn't matter <b>as long as we enumerate ALL permutations.</b>
+A. No, the number we assign to each arrangement doesn't matter <b>as long as we enumerate ALL permutations.</b>
  This is why it is important to use the <i>same mapping for the forward and inverse.</i>
 </p>
 </pre>
-<p><b>Meta-Exercise</b>: How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} picking 3 letters assigning each arrangement a different and unique number?
+<div class="ex">
+<p><b>Meta-Exercise</b>:
 </p>
+<p>Q. How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} with no repetitions picking 3 letters assigning each arrangement a different and unique number?
+</p>
+<p>A. Let's try a simpler example first. Set T = {A,B,C} has 3! = 6 possible arrangements:
+<pre>
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+</pre>
+<p>
+We can assign unique numbers a bunch of different ways:
+</p>
+<pre>
+ABC  0  0  0  0  0  0    0  0  0  0  0  0     5
+ACB  1  1  1  1  1  1    1  1  1  1  1  1     4
+BAC  2  2  2  2  2  2    3  3  3  3  3  3 ... 3
+BCA  3  3  4  4  5  5    2  2  4  4  5  5     2
+CAB  4  5  3  5  3  4    4  5  2  5  2  4     1
+CBA  5  4  5  3  4  3    5  4  5  2  4  2     0
+     \________________________________________/
+
+                   6! = 6*5*4*3*2*1 = 720
+</pre>
+<p>Back to the original problem. There are 4!/(4-3)! = 4! = 4*3*2*1 = 24 unique ways to arrange this set.  This 24 becomes a *new* set of {ABC,ABD,...,DBA,DBC}. There are 24! = 6.204484e+23 ifferent ways to assign unique numbers!
+</p>
+</div>
+
 <p>
 Getting back to where we left off .. how do we calculate what the unique enumeration
  is so we can derive how to print these permutations?
