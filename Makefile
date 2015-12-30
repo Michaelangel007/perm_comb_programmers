@@ -1,4 +1,6 @@
-all: demo_perm_almost demo_perm_fastswap demo_perm_natural demo_perm_shift print_perm_comb
+all: demo_perm_almost demo_perm_fastswap demo_perm_natural demo_perm_shift \
+     meta_perm_ordering \
+     print_perm_comb
 
 clean:
 	rm demo_perm_almost
@@ -30,6 +32,9 @@ demo_perm_natural:  demo_perm_natural.cpp  util.h perm_norep_natural.h
 	$(CC) $(CFLAGS) $< -o $@
 
 demo_perm_shift:    demo_perm_shift.cpp    util.h perm_norep_shift.h
+	$(CC) $(CFLAGS) $< -o $@
+
+meta_perm_ordering: meta_perm_ordering.cpp $(DEP_H)
 	$(CC) $(CFLAGS) $< -o $@
 
 print_perm_comb: print_perm_comb.cpp       $(DEP_H)
