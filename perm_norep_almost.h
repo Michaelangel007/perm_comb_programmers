@@ -9,23 +9,24 @@
 
         const int        MAX_BASE = 16;
         static char tmp[ MAX_BASE ]; // variable length array: set[ base ]
-        memcpy( tmp, SET, base ); // Optimization: strlen( SET ) == base
+        memcpy( tmp, SET, base );    // Optimization: strlen( SET ) == base
         int   f   = factorial( base - 1 );
         int   r   = n / f;
         char *dst = output;
 
+
         do
         {
+
+
             *dst++ = tmp[ r ];
 
             --base;
             memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element, shift remaining elements
-
-            r += n % base;
-            n  = n / base;
-            if (r >= base)
-                r %= base;
+            r += n; r %=     base;
+                    n  = n / base;
         } while (--length > 0);
+
 
         *dst = 0;
         return output;
@@ -36,15 +37,26 @@
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );
-        /* */ int   n      = 0, r;
-        /* */ int   b      = 1, base = BASE; // default to base
+        /* */ int   n      = 0, r, b = 1, base = BASE; // default to base
+
+        if (base <  2) base =  2;
+        if (base > 16) base = 16;
 
         const int        MAX_BASE = 16;
         static char set[ MAX_BASE ];
         memcpy( set, SET, base );
 
+        for( int length = 0; length < digits; length++ )
+        {
+            r = find( base, set, *text++ );
+
+
 // TODO: FIXME:
-        r = 0;
+            n *= base;
+            b *= base;
+            --base;
+            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
+        }
 
         return n;
     }

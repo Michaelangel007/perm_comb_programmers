@@ -1,8 +1,8 @@
     // Forward mapping: # -> $
-    char* itoa_perm_norep_natural( unsigned int n, int base, int length, const char SET[] = "0123456789ABCDEF" )
+    char* itoa_perm_norep_natural( unsigned int n, unsigned int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
-        static char output[ MAX_DIGITS + 1 ];
+        static char output[ MAX_DIGITS + 1 ]; // base=2 max output in binary is 32 digits
 
         if (base <  2) base =  2;
         if (base > 16) base = 16;
@@ -23,6 +23,7 @@
 
             --base;
             memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
+
             fact /= base; // Optimization: Calculate previous factorial(base-1)
         } while (--length > 1);
 
@@ -36,15 +37,25 @@
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );
-        /* */ int   n = 0, r, b = 1, base = BASE; // default to base
+        /* */ int   n      = 0, r, b = 1, base = BASE; // default to base
+
+        if (base <  2) base =  2;
+        if (base > 16) base = 16;
 
         const int        MAX_BASE = 16;
         static char set[ MAX_BASE ];
         memcpy( set, SET, base );
 
-        for(int length = 0; length < digits; length++ )
+        for( int length = 0; length < digits; length++ )
         {
             r = find( base, set, *text++ );
+
+
+// TODO: FIXME:
+            n *= base;
+            b *= base;
+            --base;
+            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
         }
 
         return n;
