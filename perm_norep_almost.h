@@ -39,8 +39,8 @@
         /* */ int   digits = strlen( input );
         /* */ int   n      = 0, r, b = 1, base = BASE; // default to base
 
-        if (base <  2) base =  2;
-        if (base > 16) base = 16;
+        if (base <  2) return -1; // Invalid base // Could also default to:
+        if (base > 16) return -1; // Invalid base // strlen( SET ) == BASE
 
         const int        MAX_BASE = 16;
         static char set[ MAX_BASE ];

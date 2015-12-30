@@ -18,7 +18,7 @@
         do
         {
             r  = n / fact; // Normally would be: n % base
-            n -= r * fact; // Normally would be: n / base // Optimization: n %= f;
+            n -= r * fact; // Normally would be: n / base // Optimization: n %= fact;
             *dst++ = tmp[ r ];
 
             --base;
@@ -37,10 +37,10 @@
     {
         const char *text   = input;
         /* */ int   digits = strlen( input );
-        /* */ int   n      = 0, r, b = factorial( BASE - 1 ), base = BASE;
+        /* */ int   n      = 0, r, fact = factorial( BASE - 1 ), base = BASE;
 
-        if (base <  2) base =  2;
-        if (base > 16) base = 16;
+        if (base <  2) return -1; // Invalid base // Could also default to:
+        if (base > 16) return -1; // Invalid base // strlen( SET ) == BASE
 
         const int        MAX_BASE = 16;
         static char set[ MAX_BASE ];
@@ -52,9 +52,9 @@
             if (r < 0)
                 return n;
 
-            n += (r * b);
-            --base;;
-            b /= base;
+            n += (r * fact);
+            --base;
+            fact /= base;
             memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
         }
 
