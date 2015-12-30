@@ -73,6 +73,35 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
         #1   01   B
         #2   10   C
         #3   11   D
+
+NOTE: Almost is still broken
+
+    = Permutations (without repetition) =
+    P#    shift: memcpy()    fast: set[r]       Almost             Natural
+    # 0   ABC ->  0 -> ABC   ADC ->  0 -> ADC   ABC ->  0 -> ABC   ABC ->  0 -> ABC
+    # 1   BAC ->  1 -> BAC   BAC ->  1 -> BAC   ACD ->  3 -> ABD   ABD ->  1 -> ABD
+    # 2   CAB ->  2 -> CAB   CAD ->  2 -> CAD   ADB ->  4 -> ACB   ACB ->  2 -> ACB
+    # 3   DAB ->  3 -> DAB   DAC ->  3 -> DAC   ABD ->  1 -> ACD   ACD ->  3 -> ACD
+    # 4   ACB ->  4 -> ACB   ABD ->  4 -> ABD   ACB ->  2 -> ADB   ADB ->  4 -> ADB
+    # 5   BCA ->  5 -> BCA   BDA ->  5 -> BDA   ADC ->  5 -> ADC   ADC ->  5 -> ADC
+    # 6   CBA ->  6 -> CBA   CBA ->  6 -> CBA   BCD ->  9 -> BCA   BAC ->  6 -> BAC
+    # 7   DBA ->  7 -> DBA   DBA ->  7 -> DBA   BDA -> 10 -> BDC   BAD ->  7 -> BAD
+    # 8   ADB ->  8 -> ADB   ACD ->  8 -> ACD   BAC ->  6 -> BCD   BCA ->  8 -> BCA
+    # 9   BDA ->  9 -> BDA   BCA ->  9 -> BCA   BCA ->  8 -> BAC   BCD ->  9 -> BCD
+    #10   CDA -> 10 -> CDA   CDA -> 10 -> CDA   BDC -> 11 -> BAD   BDA -> 10 -> BDA
+    #11   DCA -> 11 -> DCA   DCA -> 11 -> DCA   BAD ->  7 -> BDA   BDC -> 11 -> BDC
+    #12   ABD -> 12 -> ABD   ADB -> 12 -> ADB   CDA -> 16 -> CAD   CAB -> 12 -> CAB
+    #13   BAD -> 13 -> BAD   BAD -> 13 -> BAD   CAB -> 12 -> CDA   CAD -> 13 -> CAD
+    #14   CAD -> 14 -> CAD   CAB -> 14 -> CAB   CBD -> 15 -> CDB   CBA -> 14 -> CBA
+    #15   DAC -> 15 -> DAC   DAB -> 15 -> DAB   CDB -> 17 -> CBA   CBD -> 15 -> CBD
+    #16   ACD -> 16 -> ACD   ABC -> 16 -> ABC   CAD -> 13 -> CAB   CDA -> 16 -> CDA
+    #17   BCD -> 17 -> BCD   BDC -> 17 -> BDC   CBA -> 14 -> CBD   CDB -> 17 -> CDB
+    #18   CBD -> 18 -> CBD   CBD -> 18 -> CBD   DAB -> 18 -> DAB   DAB -> 18 -> DAB
+    #19   DBC -> 19 -> DBC   DBC -> 19 -> DBC   DBC -> 21 -> DAC   DAC -> 19 -> DAC
+    #20   ADC -> 20 -> ADC   ACB -> 20 -> ACB   DCA -> 22 -> DBA   DBA -> 20 -> DBA
+    #21   BDC -> 21 -> BDC   BCD -> 21 -> BCD   DAC -> 19 -> DBC   DBC -> 21 -> DBC
+    #22   CDB -> 22 -> CDB   CDB -> 22 -> CDB   DBA -> 20 -> DCA   DCA -> 22 -> DCA
+    #23   DCB -> 23 -> DCB   DCB -> 23 -> DCB   DCB -> 23 -> DCB   DCB -> 23 -> DCB
 */
     
     void permutations_norep()
