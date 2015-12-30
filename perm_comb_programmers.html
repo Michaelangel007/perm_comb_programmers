@@ -1004,7 +1004,7 @@ A. No, the number we assign to each arrangement doesn't matter <b>as long as we 
 </p>
 <p>Q. How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} with no repetitions picking 3 letters assigning each arrangement a different and unique number?
 </p>
-<p>A. Let's try a simpler example first. Set T = {A,B,C} has 3! = 6 possible arrangements:
+<p>A. Let's try a simpler example first. Set T = { <span class="digit">A</span>,<span class="digit">B</span>,<span class="digit">C</span> } has 3! = 6 possible arrangements:
 <pre>
 ABC
 ACB
@@ -1081,7 +1081,7 @@ Recall that the heart of the permutations itoa_perm() was this:
 
 </pre>
 <p>
-Let's gently massage this to behave how repetitions should be calculated:
+Let's gently massage this to behave how without repetitions should be calculated:
 </p>
 <p>
 First, the base must decrease:
@@ -1109,6 +1109,7 @@ char* itoa_perm_norep( uint32_t n, int base, int length, const char set[] = "012
 
     <b>const int</b>        MAX_BASE = 16;
     <b>static char</b> tmp[ MAX_BASE ];
+
     memcpy( tmp, set, base );
 
     int r;
@@ -1120,7 +1121,7 @@ char* itoa_perm_norep( uint32_t n, int base, int length, const char set[] = "012
         n = n / base;
         *dst++ = set[ r ];
 
-<span class="note">        base--;</span><span class="comment"> // Combination = decreasing base</span>
+<span class="note">        base--;</span><span class="comment"> // Permutation no repetition = decreasing base</span>
 <span class="note">        memcpy( set + r, set + r + 1, base - r );</span><span class="comment"> // Remove set[r] element</span>
     } <b>while</b> (--length > <span>0</span>);
 
@@ -1157,10 +1158,10 @@ Remove 'C' from the bag.
 </p>
 </p>
 
-Let's say we want to calculate the 15th permutation:
+Let's say we want to calculate the P#15 -- the 15th permutation without repetitions:
 <p>
 <pre>
-   n=15
+   n = 15
 
 first digit: n % 3 = 15 % 3 = 0, therefore 'A'
    15 / 3 = 5
@@ -1169,14 +1170,14 @@ second digit: n % 3 = 5 % 3 = 2, therefore 'C'
 third digit: n % 3 = 1 % 3 = 1, therefore 'B'
 </pre>
 <p>
-Let's walk through the 5th permutation
+Let's walk through another example, P#5 permutation.
 </p>
 
 <pre>
 first digit: n % 3 = 5 % 3 = 2, therefor 'C'
    5 / 3 = 1;
 
-Now 'C' is 'used' so we can't re-use it.  This means our base changes from 3 down to 2 !
+Now 'C' is 'used' so we can't re-use it.  This means our base (the number of elements in the temporary set) changes from 3 down to 2 !
 
 second digit: n % 3 = 1 % 2 = 1, therefor 'B'.
    1 / 2 = 0
@@ -1191,30 +1192,31 @@ third digit: 0 % 1 = 1, therefore 'A'
 <pre>
 itoa_perm_norep( int n, int base )
 {
-    const  char mainset[] = "0123456789ABCDEF";
-    /* */  char workset[] = 0; // not const for no repetion!
-    /* */  int  length    = 0;
+    const  char set[] = "0123456789ABCDEF";
+    /* */  char tmp[] = 0; // not const for no repetion!
+    /* */  int  len   = 0;
 
-    const  int          LEN = 32;
-    static char output[ LEN + 1 ]; // base 2 = max 32 binary digits + null
+    const  int          MAX_DIGITS = 32;
+    static char output[ MAX_DIGITS + 1 ]; // base 2 = max 32 binary digits + null
 
     if (base <  2) base =  2;
     if (base > 16) base = 16;
 
-    memcpy( workSet, mainSet, sizeof( mainSet ) );
+    memcpy( tmp, set, strlen( set ) );
 
     do
     {
-        uint32_t quotient  = n / base;
-        uint32_t remainder = n % base;
-        text[ length++ ] = workset[ remainder ];
+        unsigned quotient  = n / base;
+        unsigned remainder = n % base;
+        output[ len++ ] = tmp[ remainder ];
         n = quotient;
 
         base--;
-        memcpy( workset + remainder, workset + remainder + 1, base - r );
+        memcpy( tmp + remainder, tmp + remainder + 1, base - r );
 
-    } while( base > 1 );
+    } while (base > 1);
 
+    output[ len ] = 0;
 </pre>
 
 
