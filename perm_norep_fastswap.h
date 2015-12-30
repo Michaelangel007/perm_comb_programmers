@@ -43,19 +43,19 @@
         if (base > 16) return -1; // Invalid base // strlen( SET ) == BASE
 
         const int        MAX_BASE = 16;
-        static char set[ MAX_BASE ];
-        memcpy( set, SET, base );
+        static char tmp[ MAX_BASE ];
+        memcpy( tmp, SET, base );
 
         for( int length = 0; length < digits; length++ )
         {
-            r = find( base, set, *text++ );
+            r = find( base, tmp, *text++ );
             if (r < 0)
                 return n;
 
             n += (r * b);
             b *= base;
             --base;
-            set[ r ] = set[ base ];
+            tmp[ r ] = tmp[ base ];
         }
 
         return n;

@@ -43,19 +43,19 @@
         if (base > 16) return -1; // Invalid base // strlen( SET ) == BASE
 
         const int        MAX_BASE = 16;
-        static char set[ MAX_BASE ];
-        memcpy( set, SET, base );
+        static char tmp[ MAX_BASE ];
+        memcpy( tmp, SET, base );
 
         for( int length = 0; length < digits; length++ )
         {
-            r = find( base, set, *text++ );
+            r = find( base, tmp, *text++ );
             if (r < 0)
                 return n;
 //printf( "\nr: %d   n: %d   fact: %d   b: %d\n", r, n, fact, b ); // TODO: FIXME: Incorrect implementation
             n += (r * fact);
             b *= (BASE - length -1 );
             --base; fact /= base;
-            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
+            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
         }
 
         return n;
