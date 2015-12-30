@@ -2,7 +2,7 @@
     char* itoa_perm_norep_shift( unsigned int n, unsigned int base, int length, const char SET[] = "0123456789ABCDEF" )
     {
         const  int          MAX_DIGITS = 32;
-        static char output[ MAX_DIGITS + 1 ];// base=2 max output in binary is 32 digits
+        static char output[ MAX_DIGITS + 1 ];// base 2 = max 32 binary digits + null
 
         if (base <  2) base =  2;
         if (base > 16) base = 16;
