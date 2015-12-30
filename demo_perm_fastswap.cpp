@@ -51,9 +51,9 @@ https://github.com/Michaelangel007/perm_comb_programmers
     void demo_perm_fastswap()
     {
         char *output;
-        int  base   = 4;
-        int  digits = 3;
-        char set[]  = "ABCD";
+        int   base   = 4;
+        int   digits = 3;
+        char  set[]  = "ABCD";
 
         printf( "= Permtuation (Fast Swap) =\n" );
         printf( "P#  set\n" );
