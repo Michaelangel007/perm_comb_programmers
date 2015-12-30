@@ -122,14 +122,14 @@ Alt. Title: The secret to understanding Permutations and Combinations for Progra
 
 // Combinations
     /*
-            // Remove 'r'th element
-            // http://stackoverflow.com/questions/3751797/can-i-call-memcpy-and-memmove-with-number-of-bytes-set-to-zero
-            // C99 standard (7.21.1/2):
-            //    Where an argument declared as size_t n specifies the length of the array for a function, n can have the value zero on a call to that function. Unless explicitly stated otherwise in the description of a particular function in this subclause, pointer arguments on such a call shall still have valid values, as described in 7.1.4. On such a call, a function that locates a character finds no occurrence, a function that compares two character sequences returns zero, and a function that copies characters copies zero characters.
-            //int digits = base - r;
-            //if( digits > 0 )
-            base--; // Combination = decreasing base
-            memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
+        // Remove 'r'th element
+        // http://stackoverflow.com/questions/3751797/can-i-call-memcpy-and-memmove-with-number-of-bytes-set-to-zero
+        // C99 standard (7.21.1/2):
+        //    Where an argument declared as size_t n specifies the length of the array for a function, n can have the value zero on a call to that function. Unless explicitly stated otherwise in the description of a particular function in this subclause, pointer arguments on such a call shall still have valid values, as described in 7.1.4. On such a call, a function that locates a character finds no occurrence, a function that compares two character sequences returns zero, and a function that copies characters copies zero characters.
+        //int digits = base - r;
+        //if( digits > 0 )
+        base--; // Combination = decreasing base
+        memcpy( set + r, set + r + 1, base - r ); // Remove set[r] element
     */
 
     void combinations_rep()
