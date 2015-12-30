@@ -18,6 +18,8 @@ CC=gcc
 # See: http://clang.llvm.org/docs/UsersManual.html
 CFLAGS= -Wall -Wextra -Wpedantic
 
+DEP_H := $(wildcard *.h)
+
 demo_perm_almost:   demo_perm_almost.cpp   util.h perm_norep_almost.h
 	$(CC) $(CFLAGS) $< -o $@
 
@@ -30,6 +32,6 @@ demo_perm_natural:  demo_perm_natural.cpp  util.h perm_norep_natural.h
 demo_perm_shift:    demo_perm_shift.cpp    util.h perm_norep_shift.h
 	$(CC) $(CFLAGS) $< -o $@
 
-print_perm_comb: print_perm_comb.cpp       util.h
+print_perm_comb: print_perm_comb.cpp       $(DEP_H)
 	$(CC) $(CFLAGS) $< -o $@
 
