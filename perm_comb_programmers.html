@@ -928,14 +928,14 @@ Next, cross off entries that have duplicates elements:
 This begs the question:
 </p>
 <ul>
-<li>How do we calculate the <b>forward</b> transform? i.e. Given C#<span class="i">15</span> calculate "DAC" ?</li>
+<li>How do we calculate the <b>forward</b> transform? i.e. Given P#<span class="i">15</span> calculate "DAC" ?</li>
 <li>Given "<span class="char">DAC</span>" how do we derive the <b>inverse</b> (or reverse) transform and calculate the number C#<span class="i">15</span></li>
 </ul>
-<p>Hold-up!  Didn't I make a typo? DAC is C#<span class="i">19</span>, not C#<span class="i">15</span>!
+<p>Hold-up!  Didn't I make a typo? DAC is P#<span class="i">19</span>, not P#<span class="i">15</span>!
  There are actual many <b>different</b> enumeration <b>ordering</b> based on the implementation chosen.
 </p>
 
-<p>For example we could have this "forward mapping" (See example: <span class="code">comb_natural.cpp</span>):
+<p>For example we could have this "forward mapping" (See example: <span class="code">demo_perm_natural.cpp</span>):
 </p>
 <div class="defn">
 <pre>
@@ -947,7 +947,7 @@ This begs the question:
 #<span class="i">20 </span>ADC    #<span class="i">21 </span>BDC    #<span class="i">22 </span class="i">CDB    #<span class="i">23 </span>DCB
 </pre>
 </div>
-<p>Or this mapping: (See example: <span class="code">comb_fastswap.cpp</span>)</p>
+<p>Or this mapping: (See example: <span class="code">demo_perm_fastswap.cpp</span>)</p>
 <div class="defn">
 <pre>
 #<span class="digit"> 0 </span>ADC    #<span class="digit"> 1 </span class="digit">BAC    #<span class="digit"> 2 </span>CAD    #<span class="digit"> 3 </span>DAC
@@ -995,12 +995,42 @@ And Charles might chose (Alice's scheme +1):
 </div>
 
 <p>
-A. No, the number we assign to each permutation entry doesn't matter <b>as long as we enumerate ALL permutations.</b>
+A. No, the number we assign to each arrangement doesn't matter <b>as long as we enumerate ALL permutations.</b>
  This is why it is important to use the <i>same mapping for the forward and inverse.</i>
 </p>
 </pre>
-<p><b>Meta-Exercise</b>: How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} picking 3 letters assigning each arrangement a different and unique number?
+<div class="ex">
+<p><b>Meta-Exercise</b>:
 </p>
+<p>Q. How many different ways could we enumerate the the permutations of Set S = {A,B,C,D} with no repetitions picking 3 letters assigning each arrangement a different and unique number?
+</p>
+<p>A. Let's try a simpler example first. Set T = { <span class="digit">A</span>,<span class="digit">B</span>,<span class="digit">C</span> } has 3! = 6 possible arrangements:
+<pre>
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+</pre>
+<p>
+We can assign unique numbers a bunch of different ways:
+</p>
+<pre>
+ABC  0  0  0  0  0  0    0  0  0  0  0  0     5
+ACB  1  1  1  1  1  1    1  1  1  1  1  1     4
+BAC  2  2  2  2  2  2    3  3  3  3  3  3 ... 3
+BCA  3  3  4  4  5  5    2  2  4  4  5  5     2
+CAB  4  5  3  5  3  4    4  5  2  5  2  4     1
+CBA  5  4  5  3  4  3    5  4  5  2  4  2     0
+     \________________________________________/
+
+                   6! = 6*5*4*3*2*1 = 720
+</pre>
+<p>Back to the original problem. There are 4!/(4-3)! = 4! = 4*3*2*1 = 24 unique ways to arrange this set.  This 24 becomes a *new* set of {ABC,ABD,...,DBA,DBC}. There are 24! = 6.204484e+23 ifferent ways to assign unique numbers!
+</p>
+</div>
+
 <p>
 Getting back to where we left off .. how do we calculate what the unique enumeration
  is so we can derive how to print these permutations?
@@ -1051,7 +1081,7 @@ Recall that the heart of the permutations itoa_perm() was this:
 
 </pre>
 <p>
-Let's gently massage this to behave how repetitions should be calculated:
+Let's gently massage this to behave how without repetitions should be calculated:
 </p>
 <p>
 First, the base must decrease:
@@ -1079,6 +1109,7 @@ char* itoa_perm_norep( uint32_t n, int base, int length, const char set[] = "012
 
     <b>const int</b>        MAX_BASE = 16;
     <b>static char</b> tmp[ MAX_BASE ];
+
     memcpy( tmp, set, base );
 
     int r;
@@ -1090,7 +1121,7 @@ char* itoa_perm_norep( uint32_t n, int base, int length, const char set[] = "012
         n = n / base;
         *dst++ = set[ r ];
 
-<span class="note">        base--;</span><span class="comment"> // Combination = decreasing base</span>
+<span class="note">        base--;</span><span class="comment"> // Permutation no repetition = decreasing base</span>
 <span class="note">        memcpy( set + r, set + r + 1, base - r );</span><span class="comment"> // Remove set[r] element</span>
     } <b>while</b> (--length > <span>0</span>);
 
@@ -1127,10 +1158,10 @@ Remove 'C' from the bag.
 </p>
 </p>
 
-Let's say we want to calculate the 15th permutation:
+Let's say we want to calculate the P#15 -- the 15th permutation without repetitions:
 <p>
 <pre>
-   n=15
+   n = 15
 
 first digit: n % 3 = 15 % 3 = 0, therefore 'A'
    15 / 3 = 5
@@ -1139,14 +1170,14 @@ second digit: n % 3 = 5 % 3 = 2, therefore 'C'
 third digit: n % 3 = 1 % 3 = 1, therefore 'B'
 </pre>
 <p>
-Let's walk through the 5th permutation
+Let's walk through another example, P#5 permutation.
 </p>
 
 <pre>
 first digit: n % 3 = 5 % 3 = 2, therefor 'C'
    5 / 3 = 1;
 
-Now 'C' is 'used' so we can't re-use it.  This means our base changes from 3 down to 2 !
+Now 'C' is 'used' so we can't re-use it.  This means our base (the number of elements in the temporary set) changes from 3 down to 2 !
 
 second digit: n % 3 = 1 % 2 = 1, therefor 'B'.
    1 / 2 = 0
@@ -1161,30 +1192,31 @@ third digit: 0 % 1 = 1, therefore 'A'
 <pre>
 itoa_perm_norep( int n, int base )
 {
-    const  char mainset[] = "0123456789ABCDEF";
-    /* */  char workset[] = 0; // not const for no repetion!
-    /* */  int  length    = 0;
+    const  char set[] = "0123456789ABCDEF";
+    /* */  char tmp[] = 0; // not const for no repetion!
+    /* */  int  len   = 0;
 
-    const  int          LEN = 32;
-    static char output[ LEN + 1 ]; // base 2 = max 32 binary digits + null
+    const  int          MAX_DIGITS = 32;
+    static char output[ MAX_DIGITS + 1 ]; // base 2 = max 32 binary digits + null
 
     if (base <  2) base =  2;
     if (base > 16) base = 16;
 
-    memcpy( workSet, mainSet, sizeof( mainSet ) );
+    memcpy( tmp, set, strlen( set ) );
 
     do
     {
-        uint32_t quotient  = n / base;
-        uint32_t remainder = n % base;
-        text[ length++ ] = workset[ remainder ];
+        unsigned quotient  = n / base;
+        unsigned remainder = n % base;
+        output[ len++ ] = tmp[ remainder ];
         n = quotient;
 
         base--;
-        memcpy( workset + remainder, workset + remainder + 1, base - r );
+        memcpy( tmp + remainder, tmp + remainder + 1, base - r );
 
-    } while( base > 1 );
+    } while (base > 1);
 
+    output[ len ] = 0;
 </pre>
 
 
