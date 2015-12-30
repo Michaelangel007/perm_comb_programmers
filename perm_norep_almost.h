@@ -49,8 +49,8 @@
         for( int length = 0; length < digits; length++ )
         {
             r = find( base, set, *text++ );
-
-
+            if (r < 0)
+                return n;
 // TODO: FIXME:
             n *= base;
             b *= base;
