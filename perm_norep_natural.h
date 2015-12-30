@@ -53,9 +53,12 @@
                 return n;
 
             n += (r * fact);
-            --base;
-            fact /= base;
-            memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
+            if( base > 1) // when length == digit-1 we can skip these last instructions to update the working set
+            {
+                --base;
+                fact /= base;
+                memcpy( tmp + r, tmp + r + 1, base - r ); // Remove set[r] element
+            }
         }
 
         return n;
