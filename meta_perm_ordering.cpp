@@ -62,23 +62,31 @@ https://github.com/Michaelangel007/perm_comb_programmers
 
     Example of 'shift' mapping:
 
-        Ps# shift    Pn# natural
-        # 0 ABC  ==  # 0 ABC
-        # 1 BAC  ==  # 2 BAC
-        # 2 CAB  ==  # 4 CAB
-        # 3 ACB  ==  # 1 ACB
-        # 4 BCA  ==  # 3 BCA
-        # 5 CBA  ==  # 5 CBA
+        Ps# shift    Pn$ -- natural --      Ps# shift
+        # 0 ABC  ==  $ 0 ABC   $ 0 ABC  ==  # 0 ABC
+        # 1 BAC  ==  $ 2 BAC   $ 1 ACB  ==  # 3 BCA
+        # 2 CAB  ==  $ 4 CAB   $ 2 BAC  ==  # 1 ACB
+        # 3 ACB  ==  $ 1 ACB   $ 3 BCA  ==  # 4 CAB
+        # 4 BCA  ==  $ 3 BCA   $ 4 CAB  ==  # 2 BAC
+        # 5 CBA  ==  $ 5 CBA   $ 5 CBA  ==  # 5 CBA
+
+    Re-arranging the permutations of 'shift' in the order: 031425
+    will have the same mapping as 'natural'
+    Matches meta permutation: @50
 
     Example of 'fastswap' mapping:
 
-        Pf# fastswap Pn# natural
-        # 0 ACB  ==  # 1 ACB
-        # 1 BAC  ==  # 2 BAC
-        # 2 CAB  ==  # 4 CAB
-        # 3 ABC  ==  # 0 ABC
-        # 4 BCA  ==  # 3 BCA
-        # 5 CBA  ==  # 5 CBA
+        Pf# fastswap Pn$ -- natural --      Pf# fastswap
+        # 0 ACB  ==  $ 1 ACB   $ 0 ABC  ==  # 3 BCA
+        # 1 BAC  ==  $ 2 BAC   $ 1 ACB  ==  # 0 ABC
+        # 2 CAB  ==  $ 4 CAB   $ 2 BAC  ==  # 1 ACB
+        # 3 ABC  ==  $ 0 ABC   $ 3 BCA  ==  # 4 CAB
+        # 4 BCA  ==  $ 3 BCA   $ 4 CAB  ==  # 2 BAC
+        # 5 CBA  ==  $ 5 CBA   $ 5 CBA  ==  # 5 CBA
+
+    Re-arranging the permutations of 'fastswap' in the order: 301425
+    will have the same mapping as 'natural'
+    Matches meta permutation: @362
 */
 void perm_ordering()
 {
@@ -127,7 +135,7 @@ void perm_ordering()
 
 // Shift -> Natural -> Shift
     printf( "Example of 'shift' mapping:\n" );
-    printf( "    Ps# shift    Pn# -- natural --    Ps# shift\n" );
+    printf( "    Ps# shift    Pn$ -- natural --      Ps# shift\n" );
 
     temp = 0;
     for( i = 0; i < fact; i++ )
@@ -141,7 +149,7 @@ void perm_ordering()
     {
         output  = itoa_perm_norep_shift( i, base, digits, set );
         natural = atoi_perm_norep_natural( output, base, set );
-        printf( "    #%2d %s  ==  # %d", i, output, natural );
+        printf( "    #%2d %s  ==  $%2d", i, output, natural );
 
         output = itoa_perm_norep_natural( natural, base, digits, set );
         printf( " %s", output );
@@ -150,7 +158,7 @@ void perm_ordering()
         strcpy( meta_output, output );
         n      = atoi_perm_norep_shift( output, base, set );
         output = itoa_perm_norep_natural( n, base, digits, set );
-        printf( "   #%2d %s == # %d %s", i, meta_output, n, output );
+        printf( "   $%2d %s  ==  # %d %s", i, meta_output, n, output );
 
         printf( "\n" );
     }
@@ -173,7 +181,7 @@ void perm_ordering()
 
 // Fast Swap -> Natural -> Fast Swap
     printf( "Example of 'fastswap' mapping:\n" );
-    printf( "    Pf# fastswap Pn# -- natural --    Pf# fastswap\n" );
+    printf( "    Pf# fastswap Pn$ -- natural --      Pf# fastswap\n" );
 
     temp = 0;
     for( i = 0; i < fact; i++ )
@@ -187,7 +195,7 @@ void perm_ordering()
     {
         output  = itoa_perm_norep_fastswap( i, base, digits, set );
         natural = atoi_perm_norep_natural( output, base, set );
-        printf( "    #%2d %s  ==  # %d", i, output, natural );
+        printf( "    #%2d %s  ==  $%2d", i, output, natural );
 
         output = itoa_perm_norep_natural( natural, base, digits, set );
         printf( " %s", output );
@@ -196,7 +204,7 @@ void perm_ordering()
         strcpy( meta_output, output );
         n      = atoi_perm_norep_fastswap( output, base, set );
         output = itoa_perm_norep_natural( n, base, digits, set );
-        printf( "   #%2d %s == # %d %s", i, meta_output, n, output );
+        printf( "   $%2d %s  ==  #%2d %s", i, meta_output, n, output );
 
         printf( "\n" );
     }
